@@ -1,0 +1,181 @@
+    
+:root {
+    --cor-fundo: #faf8f5;        /* Bege claro */
+    --cor-texto: #333333;        /* Cinza escuro */
+    --cor-primaria: #1a5f7a;     /* Azul calmo para botões principais e destaques */
+    --cor-secundaria: #57c5b6;   /* Verde água para botões secundários */
+    --cor-botoes: #2e7d32;       /* Verde folha para ações de ajuda/doação */
+    --card-fundo: #ffffff;       /* Branco puro para destacar os blocos */
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: var(--cor-primaria);
+}
+
+.btn-custom-blue {
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-custom-blue:hover {
+    background-color: #113f52;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-custom-green {
+    background-color: var(--cor-botoes);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-custom-green:hover {
+    background-color: #1e5222;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/*ABORDAGEM MOBILE-FIRST*/
+
+/* Cabeçalho e Menu */
+.navbar-brand img {
+    max-height: 45px;
+}
+.navbar {
+    background-color: var(--card-fundo);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Seção Hero / Banner Principal */
+.hero-section {
+    padding: 40px 15px;
+    background-color: #f2ede4;
+    text-align: center;
+}
+.hero-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #113f52;
+    margin-bottom: 15px;
+}
+.hero-text {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    color: #555;
+}
+.hero-image-container {
+    margin-top: 30px;
+}
+.hero-image-container img {
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+section {
+    padding: 50px 0;
+}
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 35px;
+    color: #113f52;
+    position: relative;
+}
+
+/* Cards de Cuidados */
+.care-card {
+    height: 100%;
+    background-color: var(--card-fundo);
+    border: none;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+.care-card:hover {
+    transform: translateY(-5px);
+}
+.care-icon {
+    font-size: 2.5rem;
+    color: var(--cor-primaria);
+    margin-bottom: 15px;
+}
+
+/* Seção Como Ajudar */
+.help-box {
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.help-box-donate {
+    background-color: #c97a3e; /* Tom terracota */
+}
+.help-box-volunteer {
+    background-color: #4a7c59; /* Tom verde oliva */
+}
+
+.social-icons i {
+    font-size: 3.5rem;
+    margin: 0 10px;
+    color: var(--cor-primaria);
+    transition: color 0.3s;
+}
+.social-icons i:hover {
+    color: var(--cor-secundaria);
+}
+
+/* Rodapé */
+footer {
+    background-color: #1a2a3a;
+    color: #e0e0e0;
+    padding: 40px 0 20px 0;
+    font-size: 0.9rem;
+}
+
+/* TRANSIÇÃO PARA DESKTOP (Media Queries para telas maiores que 768px)    */
+
+@media (min-width: 768px) {
+    .hero-section {
+        padding: 80px 0;
+        text-align: left;
+    }
+    .hero-title {
+        font-size: 2.8rem;
+        line-height: 1.2;
+    }
+    .hero-text {
+        font-size: 1.2rem;
+    }
+    .hero-image-container {
+        margin-top: 0;
+    }
+    .section-title {
+        font-size: 2.2rem;
+    }
+    .care-card {
+        margin-bottom: 0;
+    }
+    .help-box {
+        margin-bottom: 0;
+        text-align: left;
+        padding: 40px;
+    }
+}
