@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Abrigo São Vicente de Paulo de Ilhéus</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container align-items-center">
+                <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
+                    <img src="../static/image/logo.svg" th:src="@{/image/logo.svg}" alt="logo" width="40" height="40" class="me-2">
+                    <div class="d-flex flex-column text-start">
+                        <span class="fw-bold lh-1 text-dark" style="font-size: 1.0rem;">ABRIGO SÃO VICENTE DE PAULO DE ILHÉUS</span>
+                        <small class="text-muted" style="font-size: 1rem; letter-spacing: 1px;">CUIDADO & AMOR</small>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/sobre}">Sobre Nós</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/ajudar}">Como Ajudar</a></li>
+                        <li class="nav-item"><a class="nav-link active px-3 me-2" href="#">Contato</a></li>
+                        <li class="nav-item mt-2 mt-lg-0">
+                            <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" th:href="@{/doar}">DOAR AGORA</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div style="margin-top: 75px;"></div>
+
+    <main>
+        <section class="hero-section text-center py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8">
+                        <h1 class="hero-title">Fale Conosco</h1>
+                        <p class="hero-text m-0">Tem dúvidas, sugestões ou quer agendar uma visita ao nosso abrigo? Envie uma mensagem ou utilize nossos canais de atendimento direto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container">
+                <div class="row g-5">
+                    
+                    <div class="col-12 col-md-6 text-start">
+                        <h2 class="h4 fw-bold text-dark mb-4">Envie uma Mensagem</h2>
+                        
+                        <form action="#" method="POST">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label fw-semibold small">Nome Completo:</label>
+                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite seu nome" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-semibold small">E-mail para Contato:</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="seu-email@exemplo.com" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label fw-semibold small">Telefone / WhatsApp:</label>
+                                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(73) 99999-9999">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="assunto" class="form-label fw-semibold small">Assunto:</label>
+                                <input type="text" id="assunto" name="assunto" class="form-control" placeholder="Ex: Quero ser voluntário, Dúvidas sobre doações" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="mensagem" class="form-label fw-semibold small">Mensagem:</label>
+                                <textarea id="mensagem" name="mensagem" class="form-control" rows="4" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-custom-blue rounded-pill px-4 fw-semibold">Enviar Mensagem</button>
+                        </form>
+                    </div>
+
+                    <div class="col-12 col-md-6 text-start">
+                        <h2 class="h4 fw-bold text-dark mb-4">Nossa Localização</h2>
+                        
+                        <ul class="list-unstyled text-muted mb-4">
+                            <li class="mb-2" th:text="${textos['contato.endereco']}"><i class="bi bi-geo-alt-fill text-primary me-2"></i> Avenida Crispim Jorge Dias Carilo, 736, Conquista, Ilhéus - BA</li>
+                            <li class="mb-2" th:text="${textos['contato.telefone']}"><i class="bi bi-telephone-fill text-primary me-2"></i> (73) 3634-1906</li>
+                            <li class="mb-0" th:text="${textos['contato.email']}"><i class="bi bi-envelope-fill text-primary me-2"></i> abrigogestor@hotmail.com</li>
+                        </ul>
+
+                        <div class="bg-body-secondary rounded-4 shadow-sm d-flex align-items-center justify-content-center border" style="width: 100%; height: 320px;">
+                            <div class="text-center p-4">
+                                <i class="bi bi-map text-muted fs-1 mb-2"></i>
+                                <p class="text-muted small m-0">Espaço reservado para a integração com o mapa de localização.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- REDES SOCIAIS -->
+        <section id="redes-sociais">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="section-title" th:text="${textos['redes.titulo']}">Siga Nossas Redes</h2>
+                        <div class="social-icons mb-3">
+                            <a href="https://www.instagram.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+                            <a href="https://wa.me/557381132731" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://www.facebook.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+                        </div>
+                        <a href="mailto:abrigogestor@hotmail.com"><i class="bi bi-envelope-at me-1"></i>abrigogestor@hotmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="text-center text-md-start">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <h5 class="fw-bold mb-3">Abrigo São Vicente de Paulo de Ilhéus</h5>
+                    <p th:text="${textos['footer.sobre.texto']}">Um lar dedicado a oferecer dignidade, saúde e carinho para a melhor idade de forma sustentável e transparente.</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h5 class="fw-bold mb-3">Contato</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i> 
+                            <span th:text="${textos['contato.telefone']}">(73) 3634-1906</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-envelope-fill me-2"></i> 
+                            <span th:text="${textos['contato.email']}">abrigogestor@hotmail.com</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-geo-alt-fill me-2"></i> 
+                            <span th:text="${textos['contato.endereco']}">Avenida Crispim Jorge Dias Carilo, 736, Conquista, Ilhéus - BA</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-secondary my-4">
+            <div class="row">
+                <div class="col-12 text-center small">
+                    <p class="mb-0">&copy; 2026 Abrigo São Vicente de Paulo de Ilhéus. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

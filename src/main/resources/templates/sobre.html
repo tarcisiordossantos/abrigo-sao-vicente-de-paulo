@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós - Abrigo São Vicente de Paulo de Ilhéus</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container align-items-center">
+                <a class="navbar-brand d-flex align-items-center" th:href="@{/}">
+                    <img src="../static/image/logo.svg" th:src="@{/image/logo.svg}" alt="logo" width="40" height="40" class="me-2">
+                    <div class="d-flex flex-column text-start">
+                        <span class="fw-bold lh-1 text-dark" style="font-size: 1.0rem;">ABRIGO SÃO VICENTE DE PAULO DE ILHÉUS</span>
+                        <small class="text-muted" style="font-size: 1rem; letter-spacing: 1px;">CUIDADO & AMOR</small>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" mt-2 mt-lg-0 type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active px-3" href="#">Sobre Nós</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/ajudar}">Como Ajudar</a></li>
+                        <li class="nav-item"><a class="nav-link px-3 me-2" th:href="@{/contato}">Contato</a></li>
+                        <li class="nav-item mt-2 mt-lg-0">
+                            <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" th:href="@{/doar}">DOAR AGORA</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div style="margin-top: 75px;"></div>
+
+    <main>
+        <main>
+        <section class="hero-section text-center py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10">
+                        <h1 class="hero-title" th:text="${textos['sobre.titulo']}">Nosso Legado Vivo de Amor</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-12 col-md-6 hero-image-container m-0">
+                        <img src="../static/image/img-hero-0.PNG" th:src="@{/image/img-hero-0.PNG}" class="w-100 rounded-4 shadow img-fluid" alt="Quem Somos - Abrigo">
+                    </div>
+                    <div class="col-12 col-md-6 text-start">
+                        <h2 class="section-title text-start mb-3" th:text="${textos['sobre.quemsomos.titulo']}">Quem Somos</h2>
+                        <p class="hero-text m-0" style="text-align: justify;" th:text="${textos['sobre.quemsomos.texto']}">A Sociedade São Vicente de Paulo de Ilhéus...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-12 col-md-6 text-start order-2 order-md-1">
+                        <h2 class="section-title text-start mb-3" th:text="${textos['sobre.historia.titulo']}">Nossa História</h2>
+                        <p class="hero-text m-0" style="text-align: justify;" th:text="${textos['sobre.historia.texto']}">Fundada em 10 de setembro de 1916...</p>
+                    </div>
+                    <div class="col-12 col-md-6 hero-image-container m-0 order-1 order-md-2">
+                        <img src="../static/image/img-hero-1.PNG" th:src="@{/image/img-hero-1.PNG}" class="w-100 rounded-4 shadow img-fluid" alt="Nossa História - Legado">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria" class="py-5">
+            <div class="container">
+                <h2 class="section-title">Conheça o Nosso Abrigo</h2>
+                <div class="row">
+                    <div class="col-12 hero-image-container m-0">
+                        <div id="sobreCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                            
+                            <div class="carousel-inner rounded-4 shadow"> 
+                                <div th:each="midia, status : ${imagensSobre}"
+                                     class="carousel-item" 
+                                     th:classappend="${status.first} ? 'active'"
+                                     data-bs-interval="5000"> 
+                                    <img src="../static/image/img-hero-1.PNG" th:src="@{${midia.urlCaminho}}" class="d-block w-100 img-fluid" alt="Instalações do abrigo">
+                                </div> 
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#sobreCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#sobreCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Próximo</span>
+                            </button>
+
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#sobreCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                                <button type="button" data-bs-target="#sobreCarousel" data-bs-slide-to="1"></button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REDES SOCIAIS -->
+         <section id="redes-sociais">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="section-title" th:text="${textos['redes.titulo']}">Siga Nossas Redes</h2>
+                        <div class="social-icons mb-3">
+                            <a href="https://www.instagram.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+                            <a href="https://wa.me/557381132731" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://www.facebook.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+                        </div>
+                        <a href="mailto:abrigogestor@hotmail.com"><i class="bi bi-envelope-at me-1"></i>abrigogestor@hotmail.com</a>
+                    </div>
+                </div>
+            </div>
+         </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="text-center text-md-start">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12 col-md-6">
+                    <h5 class="fw-bold mb-3">Abrigo São Vicente de Paulo de Ilhéus</h5>
+                    <p th:text="${textos['footer.sobre.texto']}">Um lar dedicado a oferecer dignidade, saúde e carinho para a melhor idade de forma sustentável e transparente.</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h5 class="fw-bold mb-3">Contato</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i> 
+                            <span th:text="${textos['contato.telefone']}">(73) 3634-1906</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-envelope-fill me-2"></i> 
+                            <span th:text="${textos['contato.email']}">abrigogestor@hotmail.com</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-geo-alt-fill me-2"></i> 
+                            <span th:text="${textos['contato.endereco']}">Avenida Crispim Jorge Dias Carilo, 736, Conquista, Ilhéus - BA</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-secondary my-4">
+            <div class="row">
+                <div class="col-12 text-center small">
+                    <p class="mb-0">&copy; 2026 Abrigo São Vicente de Paulo de Ilhéus. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

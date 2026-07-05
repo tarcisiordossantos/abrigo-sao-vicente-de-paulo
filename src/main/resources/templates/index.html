@@ -30,11 +30,11 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-lg-center">
                         <li class="nav-item"><a class="nav-link active px-3" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-3" href="#">Sobre Nós</a></li>
-                        <li class="nav-item"><a class="nav-link px-3" href="#">Como Ajudar</a></li>
-                        <li class="nav-item"><a class="nav-link px-3 me-2" href="#">Contato</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/sobre}">Sobre Nós</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/ajudar}">Como Ajudar</a></li>
+                        <li class="nav-item"><a class="nav-link px-3 me-2" th:href="@{/contato}">Contato</a></li>
                         <li class="nav-item mt-2 mt-lg-0">
-                            <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" href="#">DOAR AGORA</a>
+                            <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" th:href="@{/doar}">DOAR AGORA</a>
                         </li>
                     </ul>
                 </div>
@@ -53,8 +53,8 @@
                         <h1 class="hero-title" th:text="${textos['home.titulo']}">Acolhimento com Carinho e Respeito para a Melhor Idade</h1>
                         <p class="hero-text" th:text="${textos['home.descricao']}">Oferecemos um lar seguro, cuidados médicos especializados, alimentação balanceada e atividades recreativas pensadas para uma vida plena e feliz.</p>
                         <div class="d-grid d-sm-flex gap-3 justify-content-center justify-content-md-start">
-                            <button class="btn btn-custom-blue btn-lg px-4 rounded-pill fw-semibold fs-6">Conheça Nossa Casa</button>
-                            <button class="btn btn-outline-secondary btn-lg px-4 rounded-pill fw-semibold fs-6">Apoie Nossa Causa</button>
+                            <a class="btn btn-custom-blue btn-lg px-4 rounded-pill fw-semibold fs-6" th:href="@{/sobre}">Conheça Nossa Casa</a>
+                            <a class="btn btn-outline-secondary btn-lg px-4 rounded-pill fw-semibold fs-6" th:href="@{/ajudar}">Apoie Nossa Causa</a>
                         </div>
                     </div>
 
@@ -139,22 +139,28 @@
                     <div class="col-12 col-md-6">
                         <div class="help-box help-box-donate d-flex flex-column justify-content-between h-100">
                             <div>
-                                <h3 class="fw-bold mb-3" th:text="${textos['ajudar.doar.titulo']}"><i class="bi bi-postcard-heart me-2"></i>Seja um Doador</h3>
+                                <h3 class="fw-bold mb-3">
+                                    <i class="bi bi-postcard-heart me-2"></i>
+                                    <span  th:text="${textos['ajudar.doar.titulo']}">Seja um Doador</span>
+                                </h3>
                                 <p th:text="${textos['ajudar.doar.texto']}">Sua contribuição financeira direta ajuda a manter a qualidade dos nossos serviços, insumos médicos, alimentação balanceada e melhoria da infraestrutura física.</p>
                             </div>
                             <div class="mt-4 text-center text-md-start">
-                                <button class="btn btn-light fw-bold text-dark px-4 rounded-pill">Quero Doar</button>
+                                <a class="btn btn-light fw-bold text-dark px-4 rounded-pill" th:href="@{/doar}">Quero Doar</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="help-box help-box-volunteer d-flex flex-column justify-content-between h-100">
                             <div>
-                                <h3 class="fw-bold mb-3" th:text="${textos['ajudar.voluntario.titulo']}"><i class="bi bi-person-plus me-2"></i>Seja Voluntário</h3>
+                                <h3 class="fw-bold mb-3">
+                                    <i class="bi bi-person-plus me-2"></i>
+                                    <span th:text="${textos['ajudar.voluntario.titulo']}">Seja Voluntário</span>
+                                </h3>
                                 <p th:text="${textos['ajudar.voluntario.texto']}">Doe um pouco do seu tempo e talento! Você pode ajudar organizando leituras, eventos de música, oferecendo suporte administrativo ou apenas conversando e ouvindo nossos idosos.</p>
                             </div>
                             <div class="mt-4 text-center text-md-start">
-                                <button class="btn btn-light fw-bold text-dark px-4 rounded-pill">Ser Voluntário</button>
+                                <a class="btn btn-light fw-bold text-dark px-4 rounded-pill" th:href="@{/contato}">Ser Voluntário</a>
                             </div>
                         </div>
                     </div>
@@ -169,9 +175,9 @@
                     <div class="col-12">
                         <h2 class="section-title" th:text="${textos['redes.titulo']}">Siga Nossas Redes</h2>
                         <div class="social-icons mb-3">
-                            <a href="https://www.instagram.com/abrigosaovicenteilheus/"><i class="bi bi-instagram"></i></a>
-                            <a href="https://wa.me/557381132731"><i class="bi bi-whatsapp"></i></a>
-                            <a href="https://www.facebook.com/abrigosaovicenteilheus/"><i class="bi bi-facebook"></i></a>
+                            <a href="https://www.instagram.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
+                            <a href="https://wa.me/557381132731" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
+                            <a href="https://www.facebook.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
                         </div>
                         <a href="mailto:abrigogestor@hotmail.com"><i class="bi bi-envelope-at me-1"></i>abrigogestor@hotmail.com</a>
                     </div>
@@ -192,9 +198,18 @@
                 <div class="col-12 col-md-6">
                     <h5 class="fw-bold mb-3">Contato</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2" th:text="${textos['contato.telefone']}"><i class="bi bi-telephone-fill me-2"></i> (73) 3634-1906</li>
-                        <li class="mb-2" th:text="${textos['contato.email']}"><i class="bi bi-envelope-fill me-2"></i> abrigogestor@hotmail.com</li>
-                        <li class="mb-2" th:text="${textos['contato.endereco']}"><i class="bi bi-geo-alt-fill me-2"></i> Avenida Crispim Jorge Dias Carilo, 736, Conquista, Ilhéus - BA</li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone-fill me-2"></i> 
+                            <span th:text="${textos['contato.telefone']}">(73) 3634-1906</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-envelope-fill me-2"></i> 
+                            <span th:text="${textos['contato.email']}">abrigogestor@hotmail.com</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-geo-alt-fill me-2"></i> 
+                            <span th:text="${textos['contato.endereco']}">Avenida Crispim Jorge Dias Carilo, 736, Conquista, Ilhéus - BA</span>
+                        </li>
                     </ul>
                 </div>
             </div>

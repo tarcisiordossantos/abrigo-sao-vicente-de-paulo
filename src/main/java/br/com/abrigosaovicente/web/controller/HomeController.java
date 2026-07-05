@@ -33,5 +33,67 @@ public class HomeController {
 
         return "index";
     }
+
+
+     
+    @GetMapping("/sobre")
+    public String buscarSobreNos(Model model){
+        List<Conteudo> conteudos = conteudoRepository.findAll();
+        List<Midia> imagensSobre = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
+
+        Map<String, String> textos = conteudos.stream()
+            .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
+
+        model.addAttribute("imagensSobre", imagensSobre);
+        model.addAttribute("textos", textos);
+
+        return "sobre";
+    }
+
+
+
+    @GetMapping("/ajudar")
+    public String buscarComoAjudar(Model model){
+        List<Conteudo> conteudos = conteudoRepository.findAll();
+        //List<Midia> imagensSobre = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
+
+        Map<String, String> textos = conteudos.stream()
+            .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
+
+        //model.addAttribute("imagensSobre", imagensSobre);
+        model.addAttribute("textos", textos);
+
+        return "ajudar";
+    }
+
+
+
+    @GetMapping("/contato")
+    public String buscarContato(Model model){
+        List<Conteudo> conteudos = conteudoRepository.findAll();
+
+        Map<String, String> textos = conteudos.stream()
+            .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
+
+        model.addAttribute("textos", textos);
+
+        return "contato";
+    }
+
+
+
+    @GetMapping("/doar")
+    public String buscarDoar(Model model){
+        List<Conteudo> conteudos = conteudoRepository.findAll();
+        //List<Midia> imagensSobre = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
+
+        Map<String, String> textos = conteudos.stream()
+            .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
+
+        //model.addAttribute("imagensSobre", imagensSobre);
+        model.addAttribute("textos", textos);
+
+        return "doar";
+    }
     
 }
