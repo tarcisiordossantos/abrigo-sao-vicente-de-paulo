@@ -29,12 +29,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-lg-center">
-                        <li class="nav-item"><a class="nav-link active px-3" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-3" href="#">Sobre Nós</a></li>
-                        <li class="nav-item"><a class="nav-link px-3" href="#">Como Ajudar</a></li>
-                        <li class="nav-item"><a class="nav-link px-3 me-2" href="#">Contato</a></li>
+                        <li class="nav-item"><a class="nav-link active px-3" th:href="@{/}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/sobre}">Sobre Nós</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/ajudar}">Como Ajudar</a></li>
+                        <li class="nav-item"><a class="nav-link px-3 me-2" th:href="@{/contato}">Contato</a></li>
                         <li class="nav-item mt-2 mt-lg-0">
-                            <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" href="#">DOAR AGORA</a>
+                            <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" th:href="@{/doar}">DOAR AGORA</a>
                         </li>
                     </ul>
                 </div>

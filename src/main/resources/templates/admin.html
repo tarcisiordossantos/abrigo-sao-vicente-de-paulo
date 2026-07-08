@@ -29,12 +29,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-lg-center">
-                        <li class="nav-item"><a class="nav-link active px-3" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-3" href="#">Sobre Nós</a></li>
-                        <li class="nav-item"><a class="nav-link px-3" href="#">Como Ajudar</a></li>
-                        <li class="nav-item"><a class="nav-link px-3 me-2" href="#">Contato</a></li>
+                        <li class="nav-item"><a class="nav-link active px-3" th:href="@{/}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/sobre}">Sobre Nós</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/ajudar}">Como Ajudar</a></li>
+                        <li class="nav-item"><a class="nav-link px-3 me-2" th:href="@{/contato}">Contato</a></li>
                         <li class="nav-item mt-2 mt-lg-0">
-                            <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" href="#">DOAR AGORA</a>
+                            <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" th:href="@{/doar}">DOAR AGORA</a>
                         </li>
                     </ul>
                 </div>
@@ -51,16 +51,16 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>Painel de Controle</h1>
+            <h1 class="hero-title">Painel de Controle</h1>
             <a th:href="@{/logout}" class="btn btn-danger">Sair</a>
         </div>
 
         <div class="card mb-4">
-            <div class="card-header">Banner Principal (Homepage)</div>
+            <div class="card-header h3">Banner Principal (Homepage)</div>
             <div class="card-body">
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="home.titulo">
-                    <label class="form-label">Título do Banner:</label>
+                    <label class="form-label fw-bold">Título do Banner:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['home.titulo']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -69,7 +69,7 @@
 
                 <form th:action="@{/admin}" method="POST">
                     <input type="hidden" name="chave" value="home.descricao">
-                    <label class="form-label">Descrição do Banner:</label>
+                    <label class="form-label fw-bold">Descrição do Banner:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="3" th:text="${textos['home.descricao']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -79,11 +79,11 @@
         </div>
 
         <div class="card mb-4">
-            <div class="card-header">Seção: Nossos Cuidados</div>
+            <div class="card-header h3">Seção: Nossos Cuidados</div>
             <div class="card-body">
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="servicos.saude.titulo">
-                    <label class="form-label">Serviço 1 - Título:</label>
+                    <label class="form-label fw-bold">Serviço 1 - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['servicos.saude.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -91,7 +91,7 @@
                 </form>
                 <form th:action="@{/admin}" method="POST" class="mb-4">
                     <input type="hidden" name="chave" value="servicos.saude.texto">
-                    <label class="form-label">Serviço 1 - Descrição:</label>
+                    <label class="form-label fw-bold">Serviço 1 - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.saude.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -100,7 +100,7 @@
 
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="servicos.lazer.titulo">
-                    <label class="form-label">Serviço 2 - Título:</label>
+                    <label class="form-label fw-bold">Serviço 2 - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['servicos.lazer.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -108,7 +108,7 @@
                 </form>
                 <form th:action="@{/admin}" method="POST" class="mb-4">
                     <input type="hidden" name="chave" value="servicos.lazer.texto">
-                    <label class="form-label">Serviço 2 - Descrição:</label>
+                    <label class="form-label fw-bold">Serviço 2 - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.lazer.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -117,7 +117,7 @@
 
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="servicos.convivencia.titulo">
-                    <label class="form-label">Serviço 3 - Título:</label>
+                    <label class="form-label fw-bold">Serviço 3 - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['servicos.convivencia.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -125,7 +125,7 @@
                 </form>
                 <form th:action="@{/admin}" method="POST">
                     <input type="hidden" name="chave" value="servicos.convivencia.texto">
-                    <label class="form-label">Serviço 3 - Descrição:</label>
+                    <label class="form-label fw-bold">Serviço 3 - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.convivencia.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -135,11 +135,11 @@
         </div>
 
         <div class="card mb-4">
-            <div class="card-header">Seção: Como Ajudar</div>
+            <div class="card-header h3">Seção: Como Ajudar (Chamadas da Home)</div>
             <div class="card-body">
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="ajudar.doar.titulo">
-                    <label class="form-label">Bloco Doador - Título:</label>
+                    <label class="form-label fw-bold">Bloco Doador - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['ajudar.doar.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -147,7 +147,7 @@
                 </form>
                 <form th:action="@{/admin}" method="POST" class="mb-4">
                     <input type="hidden" name="chave" value="ajudar.doar.texto">
-                    <label class="form-label">Bloco Doador - Descrição:</label>
+                    <label class="form-label fw-bold">Bloco Doador - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['ajudar.doar.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -156,7 +156,7 @@
 
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="ajudar.voluntario.titulo">
-                    <label class="form-label">Bloco Voluntário - Título:</label>
+                    <label class="form-label fw-bold">Bloco Voluntário - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['ajudar.voluntario.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -164,7 +164,7 @@
                 </form>
                 <form th:action="@{/admin}" method="POST">
                     <input type="hidden" name="chave" value="ajudar.voluntario.texto">
-                    <label class="form-label">Bloco Voluntário - Descrição:</label>
+                    <label class="form-label fw-bold">Bloco Voluntário - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['ajudar.voluntario.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -174,11 +174,162 @@
         </div>
 
         <div class="card mb-4">
-            <div class="card-header">Seção: Redes Sociais</div>
+            <div class="card-header h3">Página: Sobre Nós</div>
+            <div class="card-body">
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="sobre.quemsomos.titulo">
+                    <label class="form-label fw-bold">Seção 1 - Título (Quem Somos):</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['sobre.quemsomos.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST" class="mb-4">
+                    <input type="hidden" name="chave" value="sobre.quemsomos.texto">
+                    <label class="form-label fw-bold">Seção 1 - Conteúdo de Texto:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="4" th:text="${textos['sobre.quemsomos.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="sobre.historia.titulo">
+                    <label class="form-label fw-bold">Seção 2 - Título (Nossa História):</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['sobre.historia.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST">
+                    <input type="hidden" name="chave" value="sobre.historia.texto">
+                    <label class="form-label fw-bold">Seção 2 - Conteúdo de Texto:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="4" th:text="${textos['sobre.historia.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header h3">Página: Como Ajudar (Página Dedicada)</div>
+            <div class="card-body">
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="comoajudar.titulo">
+                    <label class="form-label fw-bold">Título da Página:</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['comoajudar.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST" class="mb-4">
+                    <input type="hidden" name="chave" value="comoajudar.descricao">
+                    <label class="form-label fw-bold">Descrição da Página:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="2" th:text="${textos['comoajudar.descricao']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="comoajudar.alimentos.titulo">
+                    <label class="form-label fw-bold">Seção 1 - Título (Ex: Doação de Alimentos):</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['comoajudar.alimentos.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST" class="mb-4">
+                    <input type="hidden" name="chave" value="comoajudar.alimentos.texto">
+                    <label class="form-label fw-bold">Seção 1 - Conteúdo de Texto:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="4" th:text="${textos['comoajudar.alimentos.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="comoajudar.financeiro.titulo">
+                    <label class="form-label fw-bold">Seção 2 - Título (Ex: Doação Financeira):</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['comoajudar.financeiro.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST">
+                    <input type="hidden" name="chave" value="comoajudar.financeiro.texto">
+                    <label class="form-label fw-bold">Seção 2 - Conteúdo de Texto:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="4" th:text="${textos['comoajudar.financeiro.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="comoajudar.voluntario.titulo">
+                    <label class="form-label fw-bold">Seção 3 - Título (Ex: Trabalho Voluntário):</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['comoajudar.voluntario.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST">
+                    <input type="hidden" name="chave" value="comoajudar.voluntario.texto">
+                    <label class="form-label fw-bold">Seção 2 - Conteúdo de Texto:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="4" th:text="${textos['comoajudar.voluntario.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header h3">Página: Doar Agora</div>
+            <div class="card-body">
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="doar.titulo">
+                    <label class="form-label fw-bold">Título da Página (Hero):</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['doar.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST" class="mb-4">
+                    <input type="hidden" name="chave" value="doar.descricao">
+                    <label class="form-label fw-bold">Descrição da Página (Subtítulo Hero):</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="2" th:text="${textos['doar.descricao']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="doar.apelo.titulo">
+                    <label class="form-label fw-bold">Título do Card de Apelo (Ex: R$ 10,00):</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['doar.apelo.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST">
+                    <input type="hidden" name="chave" value="doar.apelo.texto">
+                    <label class="form-label fw-bold">Texto de Apelo Emocional:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="3" th:text="${textos['doar.apelo.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header h3">Seção: Redes Sociais</div>
             <div class="card-body">
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="redes.titulo">
-                    <label class="form-label">Redes Sociais - Título:</label>
+                    <label class="form-label fw-bold">Redes Sociais - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['redes.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -188,11 +339,11 @@
         </div>
 
         <div class="card">
-            <div class="card-header">Contatos e Rodapé</div>
+            <div class="card-header h3">Contatos e Rodapé</div>
             <div class="card-body">
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="contato.telefone">
-                    <label class="form-label">Telefone:</label>
+                    <label class="form-label fw-bold">Telefone:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['contato.telefone']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -201,7 +352,7 @@
 
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="contato.email">
-                    <label class="form-label">E-mail:</label>
+                    <label class="form-label fw-bold">E-mail:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['contato.email']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -210,7 +361,7 @@
 
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="contato.endereco">
-                    <label class="form-label">Endereço:</label>
+                    <label class="form-label fw-bold">Endereço:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['contato.endereco']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -219,7 +370,7 @@
 
                 <form th:action="@{/admin}" method="POST">
                     <input type="hidden" name="chave" value="footer.sobre.texto">
-                    <label class="form-label">Texto do Rodapé:</label>
+                    <label class="form-label fw-bold">Texto do Rodapé:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['footer.sobre.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -227,7 +378,6 @@
                 </form>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

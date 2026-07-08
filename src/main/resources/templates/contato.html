@@ -60,34 +60,49 @@
                     <div class="col-12 col-md-6 text-start">
                         <h2 class="h4 fw-bold text-dark mb-4">Envie uma Mensagem</h2>
                         
-                        <form action="#" method="POST">
+                        <form th:action="@{/contato}" th:object="${contatoForm}" method="POST">
                             <div class="mb-3">
                                 <label for="nome" class="form-label fw-semibold small">Nome Completo:</label>
-                                <input type="text" id="nome" name="nome" class="form-control" placeholder="Digite seu nome" required>
+                                <input type="text" th:field="*{nome}" class="form-control" placeholder="Digite seu nome" required>
+                                <div th:if="${#fields.hasErrors('nome')}" class="text-danger small mt-1">
+                                    Por favor, deve preencher o seu nome.
+                                </div>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="email" class="form-label fw-semibold small">E-mail para Contato:</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="seu-email@exemplo.com" required>
+                                <input type="email" th:field="*{email}" class="form-control" placeholder="seu-email@exemplo.com" required>
+                                <div th:if="${#fields.hasErrors('email')}" class="text-danger small mt-1">
+                                    E-mail inválido ou em branco.
+                                </div>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="telefone" class="form-label fw-semibold small">Telefone / WhatsApp:</label>
-                                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(73) 99999-9999">
+                                <input type="tel" th:field="*{telefone}" class="form-control" placeholder="(73) 99999-9999">
                             </div>
                             
                             <div class="mb-3">
                                 <label for="assunto" class="form-label fw-semibold small">Assunto:</label>
-                                <input type="text" id="assunto" name="assunto" class="form-control" placeholder="Ex: Quero ser voluntário, Dúvidas sobre doações" required>
+                                <input type="text" th:field="*{assunto}" class="form-control" placeholder="Ex: Quero ser voluntário, Dúvidas sobre doações" required>
+                                <div th:if="${#fields.hasErrors('assunto')}" class="text-danger small mt-1">
+                                    Por favor, deve preencher o assunto.
+                                </div>
                             </div>
                             
                             <div class="mb-4">
                                 <label for="mensagem" class="form-label fw-semibold small">Mensagem:</label>
-                                <textarea id="mensagem" name="mensagem" class="form-control" rows="4" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                                <textarea th:field="*{mensagem}" class="form-control" rows="4" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                                <div th:if="${#fields.hasErrors('assunto')}" class="text-danger small mt-1">
+                                    Por favor, deve preencher a mensagem.
+                                </div>
                             </div>
                             
                             <button type="submit" class="btn btn-custom-blue rounded-pill px-4 fw-semibold">Enviar Mensagem</button>
                         </form>
+                        <div th:if="${param.sucesso}" class="alert alert-success text-center mt-2" role="alert">
+                            <i class="bi bi-check-circle-fill me-1"></i>Mensagem enviada com sucesso!
+                        </div>
                     </div>
 
                     <div class="col-12 col-md-6 text-start">
@@ -99,14 +114,16 @@
                             <li class="mb-0" th:text="${textos['contato.email']}"><i class="bi bi-envelope-fill text-primary me-2"></i> abrigogestor@hotmail.com</li>
                         </ul>
 
-                        <div class="bg-body-secondary rounded-4 shadow-sm d-flex align-items-center justify-content-center border" style="width: 100%; height: 320px;">
-                            <div class="text-center p-4">
-                                <i class="bi bi-map text-muted fs-1 mb-2"></i>
-                                <p class="text-muted small m-0">Espaço reservado para a integração com o mapa de localização.</p>
-                            </div>
+                        <div class="rounded-4 shadow-sm border overflow-hidden" style="width: 100%; height: 320px;">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15430.181559813826!2d-39.05469842933925!3d-14.794617825051109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7390bdc4b176899%3A0x527d077eb8bd1d6a!2sAbrigo%20S%C3%A3o%20Vicente%20de%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1783386186609!5m2!1spt-BR!2sbr"
+                                style="border:0; width: 100%; height: 100%;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>

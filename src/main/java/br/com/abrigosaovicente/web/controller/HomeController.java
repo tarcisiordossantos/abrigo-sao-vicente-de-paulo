@@ -6,12 +6,18 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import br.com.abrigosaovicente.web.controller.dto.ContatoForm;
 import br.com.abrigosaovicente.web.model.Conteudo;
 import br.com.abrigosaovicente.web.model.Midia;
 import br.com.abrigosaovicente.web.repository.ConteudoRepository;
 import br.com.abrigosaovicente.web.repository.MidiaRepository;
+import br.com.abrigosaovicente.web.service.EmailService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -19,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class HomeController {
     private final ConteudoRepository conteudoRepository;
     private final MidiaRepository midiaRepository;
+    private final EmailService emailService;
 
     @GetMapping("/")
     public String buscar(Model model){
@@ -76,8 +83,27 @@ public class HomeController {
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
 
         model.addAttribute("textos", textos);
+        model.addAttribute("contatoForm", new ContatoForm("", "", "", "", ""));
 
         return "contato";
+    }
+
+    @PostMapping("/contato")
+    public String enviarEmail(@Valid @ModelAttribute ContatoForm dto, BindingResult result, Model model){
+        
+        if(result.hasErrors()) {
+
+            List<Conteudo> conteudos = conteudoRepository.findAll();
+            Map<String, String> textos = conteudos.stream()
+                .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
+            model.addAttribute("textos", textos);
+
+            return "contato";
+        }
+
+        emailService.enviarEmail(dto);
+        
+        return "redirect:/contato?sucesso=true";
     }
 
 
