@@ -47,11 +47,13 @@ public class HomeController {
     public String buscarSobreNos(Model model){
         List<Conteudo> conteudos = conteudoRepository.findAll();
         List<Midia> imagensSobre = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
+        List<Midia> galeria = midiaRepository.findBySecaoAndAtivoTrue("galeria");
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
 
         model.addAttribute("imagensSobre", imagensSobre);
+        model.addAttribute("galeria", galeria);
         model.addAttribute("textos", textos);
 
         return "sobre";
