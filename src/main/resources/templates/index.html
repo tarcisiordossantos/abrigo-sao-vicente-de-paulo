@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{/css/estilos.css}">
+    <link rel="icon" th:href="@{/image/favicon-32x32.png}" type="image/x-icon">
 </head>
 <body>
 
@@ -50,11 +51,11 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-6">
-                        <h1 class="hero-title" th:text="${textos['home.titulo']}">Acolhimento com Carinho e Respeito para a Melhor Idade</h1>
-                        <p class="hero-text" th:text="${textos['home.descricao']}">Oferecemos um lar seguro, cuidados médicos especializados, alimentação balanceada e atividades recreativas pensadas para uma vida plena e feliz.</p>
+                        <h1 class="hero-title" th:text="${textos['home.titulo']}">Há mais de um século cuidando com amor, dignidade e respeito</h1>
+                        <p class="hero-text" th:text="${textos['home.descricao']}">O Abrigo São Vicente de Ilhéus é uma Instituição de Longa Permanência para Idosos que acolhe, protege e promove qualidade de vida para pessoas idosas em situação de vulnerabilidade social.</p>
                         <div class="d-grid d-sm-flex gap-3 justify-content-center justify-content-md-start">
-                            <a class="btn btn-custom-blue btn-lg px-4 rounded-pill fw-semibold fs-6" th:href="@{/sobre}">Conheça Nossa Casa</a>
-                            <a class="btn btn-outline-secondary btn-lg px-4 rounded-pill fw-semibold fs-6" th:href="@{/ajudar}">Apoie Nossa Causa</a>
+                            <a class="btn btn-custom-blue btn-lg px-4 rounded-pill fw-semibold fs-6" th:href="@{/sobre}">Conheça Nossa História</a>
+                            <a class="btn btn-custom-green btn-lg px-4 rounded-pill fw-semibold fs-6" th:href="@{/doar}">Faça sua Doação  </a>
                         </div>
                     </div>
 
@@ -104,27 +105,50 @@
         <!-- SEÇÃO SERVIÇOS -->
         <section id="servicos">
             <div class="container">
-                <h2 class="section-title">Nossos Cuidados</h2>
+                <h2 class="section-title">Nossos Serviços</h2>
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-md-4">
+                        <div class="care-card">
+                            <div class="care-icon"><i class="bi bi-people-fill"></i></div>
+                            <h3 class="h5 fw-bold" th:text="${textos['servicos.assistencia.titulo']}">Assistência Integral</h3>
+                            <p class="text-muted mb-0" th:text="${textos['servicos.assistencia.texto']}">Cuidados diários e acompanhamento permanente.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="care-card">
+                            <div class="care-icon"><i class="bi bi-heart-fill"></i></i></div>
+                            <h3 class="h5 fw-bold" th:text="${textos['servicos.saude.titulo']}">Atendimento em Saúde</h3>
+                            <p class="text-muted mb-0" th:text="${textos['servicos.saude.texto']}">Equipe multidisciplinar e acompanhamento médico.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="care-card">
+                            <div class="care-icon"><i class="bi bi-apple"></i></div>
+                            <h3 class="h5 fw-bold" th:text="${textos['servicos.alimentacao.titulo']}">Alimentação Balanceada</h3>
+                            <p class="text-muted mb-0"  th:text="${textos['servicos.alimentacao.texto']}">Nutrição adequada às necessidades dos residentes.</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="row g-4">
                     <div class="col-12 col-md-4">
                         <div class="care-card">
-                            <div class="care-icon"><i class="bi bi-heart-pulse"></i></div>
-                            <h3 class="h5 fw-bold" th:text="${textos['servicos.saude.titulo']}">Saúde Especializada</h3>
-                            <p class="text-muted mb-0" th:text="${textos['servicos.saude.texto']}">Acompanhamento médico contínuo, enfermagem e administração de rotinas de saúde.</p>
+                            <div class="care-icon"><i class="bi bi-universal-access-circle"></i></div>
+                            <h3 class="h5 fw-bold" th:text="${textos['servicos.fisioterapia.titulo']}">Fisioterapia</h3>
+                            <p class="text-muted mb-0" th:text="${textos['servicos.fisioterapia.texto']}">Promoção da mobilidade e qualidade de vida.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="care-card">
+                            <div class="care-icon"><i class="bi bi-balloon-fill"></i></div>
+                            <h3 class="h5 fw-bold" th:text="${textos['servicos.lazer.titulo']}">Atividades Recreativas</h3>
+                            <p class="text-muted mb-0" th:text="${textos['servicos.lazer.texto']}">Momentos de convivência, lazer e socialização.</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="care-card">
                             <div class="care-icon"><i class="bi bi-stars"></i></div>
-                            <h3 class="h5 fw-bold" th:text="${textos['servicos.lazer.titulo']}">Lazer e Estímulo</h3>
-                            <p class="text-muted mb-0" th:text="${textos['servicos.lazer.texto']}">Oficinas de artesanato, musicoterapia, leituras e atividades físicas adaptadas.</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="care-card">
-                            <div class="care-icon"><i class="bi bi-people"></i></div>
-                            <h3 class="h5 fw-bold" th:text="${textos['servicos.convivencia.titulo']}">Convivência Coletiva</h3>
-                            <p class="text-muted mb-0"  th:text="${textos['servicos.convivencia.texto']}">Ambiente fraterno que estimula a criação de novas amizades, conversas e calor humano constante.</p>
+                            <h3 class="h5 fw-bold" th:text="${textos['servicos.apoio.titulo']}">Apoio Espiritual</h3>
+                            <p class="text-muted mb-0"  th:text="${textos['servicos.apoio.texto']}">Celebrações, oração e acompanhamento religioso.</p>
                         </div>
                     </div>
                 </div>
@@ -134,33 +158,48 @@
         <!-- COMO AJUDAR -->
         <section id="como-ajudar">
             <div class="container">
-                <h2 class="section-title">Como Ajudar</h2>
-                <div class="row g-4">
-                    <div class="col-12 col-md-6">
+                <h2 class="section-title m-2">Como Ajudar</h2>
+                <p class="h5 fw-bold text-center mb-3" th:text="${textos['ajudar.texto']}">Sua Solidariedade Transforma Vidas</p>
+                <div class="row g-4 mb-4">
+                    <div class="col-12 col-md-4">
                         <div class="help-box help-box-donate d-flex flex-column justify-content-between h-100">
                             <div>
-                                <h3 class="fw-bold mb-3">
+                                <h3 class="h4 fw-bold mb-3">
                                     <i class="bi bi-postcard-heart me-2"></i>
-                                    <span  th:text="${textos['ajudar.doar.titulo']}">Seja um Doador</span>
+                                    <span  th:text="${textos['ajudar.doar.titulo']}">Doação Financeira</span>
                                 </h3>
-                                <p th:text="${textos['ajudar.doar.texto']}">Sua contribuição financeira direta ajuda a manter a qualidade dos nossos serviços, insumos médicos, alimentação balanceada e melhoria da infraestrutura física.</p>
+                                <p th:text="${textos['ajudar.doar.texto']}">Doe por Pix, transferência bancária ou contribuições mensais. Sua contribuição financeira ajuda a manter a qualidade dos nossos serviços, insumos médicos, alimentação e melhoria da infraestrutura física.</p>
                             </div>
                             <div class="mt-4 text-center text-md-start">
                                 <a class="btn btn-light fw-bold text-dark px-4 rounded-pill" th:href="@{/doar}">Quero Doar</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-4">
                         <div class="help-box help-box-volunteer d-flex flex-column justify-content-between h-100">
                             <div>
-                                <h3 class="fw-bold mb-3">
+                                <h3 class="h4 fw-bold mb-3">
                                     <i class="bi bi-person-plus me-2"></i>
-                                    <span th:text="${textos['ajudar.voluntario.titulo']}">Seja Voluntário</span>
+                                    <span th:text="${textos['ajudar.voluntario.titulo']}">Trabalho Voluntário</span>
                                 </h3>
-                                <p th:text="${textos['ajudar.voluntario.texto']}">Doe um pouco do seu tempo e talento! Você pode ajudar organizando leituras, eventos de música, oferecendo suporte administrativo ou apenas conversando e ouvindo nossos idosos.</p>
+                                <p th:text="${textos['ajudar.voluntario.texto']}">Doe tempo, conhecimento e carinho. Cada gesto de dedicação, cada experiência compartilhada e cada demonstração de afeto podem transformar vidas e levar esperança a quem mais precisa.</p>
                             </div>
                             <div class="mt-4 text-center text-md-start">
-                                <a class="btn btn-light fw-bold text-dark px-4 rounded-pill" th:href="@{/contato}">Ser Voluntário</a>
+                                <a class="btn btn-light fw-bold text-dark px-4 rounded-pill" th:href="@{/contato}">Quero Ajudar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="help-box help-box-donate d-flex flex-column justify-content-between h-100">
+                            <div>
+                                <h3 class="h4 fw-bold mb-3">
+                                    <i class="bi bi-gift me-2"></i>
+                                    <span th:text="${textos['ajudar.produtos.titulo']}">Doação de Produtos</span>
+                                </h3>
+                                <p th:text="${textos['ajudar.produtos.texto']}">Doe alimentos, fraldas, materiais de higiene pessoal e produtos de limpeza. Sua contribuição faz toda a diferença na vida de quem mais precisa, levando cuidado, dignidade e esperança.</p>
+                            </div>
+                            <div class="mt-4 text-center text-md-start">
+                                <a class="btn btn-light fw-bold text-dark px-4 rounded-pill" th:href="@{/contato}">Quero Ajudar</a>
                             </div>
                         </div>
                     </div>
@@ -169,21 +208,21 @@
         </section>
 
         <!-- REDES SOCIAIS -->
-         <section id="redes-sociais">
+        <section id="redes-sociais">
             <div class="container text-center">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="section-title" th:text="${textos['redes.titulo']}">Siga Nossas Redes</h2>
+                        <h2 class="section-title" th:text="${textos['redes.titulo']}">Entre em Contato</h2>
                         <div class="social-icons mb-3">
                             <a href="https://www.instagram.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
                             <a href="https://wa.me/557381132731" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
                             <a href="https://www.facebook.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
                         </div>
-                        <a href="mailto:abrigogestor@hotmail.com"><i class="bi bi-envelope-at me-1"></i>abrigogestor@hotmail.com</a>
+                        <a href="mailto:lardeidososasvp@gmail.com"><i class="bi bi-envelope-at me-1"></i>lardeidososasvp@gmail.com</a>
                     </div>
                 </div>
             </div>
-         </section>
+        </section>
          
     </main>
 
@@ -193,24 +232,60 @@
             <div class="row g-4">
                 <div class="col-12 col-md-6">
                     <h5 class="fw-bold mb-3">Abrigo São Vicente de Paulo de Ilhéus</h5>
-                    <p th:text="${textos['footer.sobre.texto']}">Um lar dedicado a oferecer dignidade, saúde e carinho para a melhor idade de forma sustentável e transparente.</p>
-                </div>
-                <div class="col-12 col-md-6">
-                    <h5 class="fw-bold mb-3">Contato</h5>
                     <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="bi bi-geo-alt-fill me-2"></i> 
+                            <span th:text="${textos['contato.endereco']}">Avenida Crispim Jorge Dias Carilo, 736, Conquista, Ilhéus - BA</span>
+                        </li>
                         <li class="mb-2">
                             <i class="bi bi-telephone-fill me-2"></i> 
                             <span th:text="${textos['contato.telefone']}">(73) 3634-1906</span>
                         </li>
                         <li class="mb-2">
-                            <i class="bi bi-envelope-fill me-2"></i> 
-                            <span th:text="${textos['contato.email']}">abrigogestor@hotmail.com</span>
+                            <a href="https://wa.me/557381132731" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-whatsapp me-2"></i> (73) 8113-2731</a>
                         </li>
                         <li class="mb-2">
-                            <i class="bi bi-geo-alt-fill me-2"></i> 
-                            <span th:text="${textos['contato.endereco']}">Avenida Crispim Jorge Dias Carilo, 736, Conquista, Ilhéus - BA</span>
+                            <i class="bi bi-envelope-fill me-2"></i> 
+                            <span th:text="${textos['contato.email']}">lardeidososasvp@gmail.com</span>
                         </li>
                     </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <h5 class="fw-bold mb-3">Redes Sociais</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="https://www.instagram.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-instagram me-2"></i> Instagram</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://www.facebook.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-facebook me-2"></i> Facebook </a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-youtube me-2"></i> Youtube
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3">
+                    <h5 class="fw-bold mb-3">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a th:href="@{/sobre}"><i class="bi bi-link me-2"></i>Quem Somos</a>
+                        </li>
+                        <li class="mb-2">
+                            <a th:href="@{/doar}"><i class="bi bi-link me-2"></i> Doações</a>
+                        </li>
+                        <li class="mb-2">
+                            <a th:href="@{/contato}"><i class="bi bi-link me-2"></i> Contato</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="fw-semibold m-0" th:text="${textos['footer.sobre.texto']}">Ajude-nos a continuar escrevendo esta história de cuidado e amor aos idosos. Sua contribuição faz a diferença.</p>
                 </div>
             </div>
             <hr class="bg-secondary my-4">

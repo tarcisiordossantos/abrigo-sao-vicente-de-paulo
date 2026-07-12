@@ -15,9 +15,20 @@ body {
     overflow-x: hidden;
 }
 
-a {
+section a {
     text-decoration: none;
     color: var(--cor-primaria);
+}
+
+footer a {
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: color 0.3s ease;
+}
+
+footer a:hover,
+footer a:focus {
+    color: var(--cor-secundaria);
 }
 
 .btn-custom-blue {
