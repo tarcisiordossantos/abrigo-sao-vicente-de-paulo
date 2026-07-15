@@ -46,15 +46,17 @@ public class HomeController {
     @GetMapping("/sobre")
     public String buscarSobreNos(Model model){
         List<Conteudo> conteudos = conteudoRepository.findAll();
-        List<Midia> imagensSobre = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
         List<Midia> galeria = midiaRepository.findBySecaoAndAtivoTrue("galeria");
+        Midia fotoQuemSomos = midiaRepository.findBySecao("quem-somos").orElse(null);
+        Midia fotoNossaHistoria = midiaRepository.findBySecao("nossa-historia").orElse(null);
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
 
-        model.addAttribute("imagensSobre", imagensSobre);
         model.addAttribute("galeria", galeria);
         model.addAttribute("textos", textos);
+        model.addAttribute("fotoQuemSomos", fotoQuemSomos);
+        model.addAttribute("fotoNossaHistoria", fotoNossaHistoria);
 
         return "sobre";
     }
@@ -64,13 +66,17 @@ public class HomeController {
     @GetMapping("/ajudar")
     public String buscarComoAjudar(Model model){
         List<Conteudo> conteudos = conteudoRepository.findAll();
-        //List<Midia> imagensSobre = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
+        Midia fotoDoacaoAlimentos = midiaRepository.findBySecao("doacao-alimentos").orElse(null);
+        Midia fotoRecursosFinanceiros = midiaRepository.findBySecao("recursos-financeiros").orElse(null);
+        Midia fotoTrabalhoVoluntario = midiaRepository.findBySecao("trabalho-voluntario").orElse(null);
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
 
-        //model.addAttribute("imagensSobre", imagensSobre);
         model.addAttribute("textos", textos);
+        model.addAttribute("fotoDoacaoAlimentos", fotoDoacaoAlimentos);
+        model.addAttribute("fotoRecursosFinanceiros", fotoRecursosFinanceiros);
+        model.addAttribute("fotoTrabalhoVoluntario", fotoTrabalhoVoluntario);
 
         return "ajudar";
     }
@@ -113,13 +119,13 @@ public class HomeController {
     @GetMapping("/doar")
     public String buscarDoar(Model model){
         List<Conteudo> conteudos = conteudoRepository.findAll();
-        //List<Midia> imagensSobre = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
+        Midia fotoDoarAgora = midiaRepository.findBySecao("doar-agora").orElse(null);
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
 
-        //model.addAttribute("imagensSobre", imagensSobre);
         model.addAttribute("textos", textos);
+        model.addAttribute("fotoDoarAgora", fotoDoarAgora);
 
         return "doar";
     }

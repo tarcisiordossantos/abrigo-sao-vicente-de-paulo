@@ -78,13 +78,59 @@
                 </form>
             </div>
         </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">Carrossel Banner Principal</div>
+            <div class="card-body">
+                
+                <!-- Formulário de Upload -->
+                <form th:action="@{/admin/carrossel/upload}" method="POST" enctype="multipart/form-data" class="mb-4">
+                    <label class="form-label small fw-semibold">Adicionar Nova Foto:</label>
+                    <div class="input-group">
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                        <button class="btn btn-custom-blue" type="submit">Enviar Foto</button>
+                    </div>
+                </form>
+
+                <!-- Grade de Miniaturas com as fotos que já estão salvas no banco -->
+                <h6 class="fw-bold mb-3 small text-secondary">Fotos Atuais no Site:</h6>
+                <div class="row g-3">
+                    <div class="col-6 col-md-3 text-center" th:each="midia : ${midiasCarrossel}">
+                        <div class="border rounded p-2">
+                            <img th:src="${midia.urlCaminho}" class="img-thumbnail mb-2" style="height: 100px; object-fit: cover; width: 100%;">
+                            <form th:action="@{/admin/excluir/{id}(id=${midia.id})}" th:method="delete" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm w-100" style="font-size: 0.8rem;">Excluir</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <div class="card mb-4">
             <div class="card-header h3">Seção: Nossos Cuidados</div>
             <div class="card-body">
                 <form th:action="@{/admin}" method="POST" class="mb-3">
-                    <input type="hidden" name="chave" value="servicos.saude.titulo">
+                    <input type="hidden" name="chave" value="servicos.assistencia.titulo">
                     <label class="form-label fw-bold">Serviço 1 - Título:</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['servicos.assistencia.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST" class="mb-4">
+                    <input type="hidden" name="chave" value="servicos.assistencia.texto">
+                    <label class="form-label fw-bold">Serviço 1 - Descrição:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.assistencia.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="servicos.saude.titulo">
+                    <label class="form-label fw-bold">Serviço 2 - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['servicos.saude.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -92,7 +138,7 @@
                 </form>
                 <form th:action="@{/admin}" method="POST" class="mb-4">
                     <input type="hidden" name="chave" value="servicos.saude.texto">
-                    <label class="form-label fw-bold">Serviço 1 - Descrição:</label>
+                    <label class="form-label fw-bold">Serviço 2 - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.saude.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -100,16 +146,50 @@
                 </form>
 
                 <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="servicos.alimentacao.titulo">
+                    <label class="form-label fw-bold">Serviço 3 - Título:</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['servicos.alimentacao.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST">
+                    <input type="hidden" name="chave" value="servicos.alimentacao.texto">
+                    <label class="form-label fw-bold">Serviço 3 - Descrição:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.alimentacao.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="servicos.fisioterapia.titulo">
+                    <label class="form-label fw-bold">Serviço 4 - Título:</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['servicos.fisioterapia.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST">
+                    <input type="hidden" name="chave" value="servicos.fisioterapia.texto">
+                    <label class="form-label fw-bold">Serviço 4 - Descrição:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.fisioterapia.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="servicos.lazer.titulo">
-                    <label class="form-label fw-bold">Serviço 2 - Título:</label>
+                    <label class="form-label fw-bold">Serviço 5 - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['servicos.lazer.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
                     </div>
                 </form>
-                <form th:action="@{/admin}" method="POST" class="mb-4">
+                <form th:action="@{/admin}" method="POST">
                     <input type="hidden" name="chave" value="servicos.lazer.texto">
-                    <label class="form-label fw-bold">Serviço 2 - Descrição:</label>
+                    <label class="form-label fw-bold">Serviço 5 - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.lazer.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -117,18 +197,18 @@
                 </form>
 
                 <form th:action="@{/admin}" method="POST" class="mb-3">
-                    <input type="hidden" name="chave" value="servicos.convivencia.titulo">
-                    <label class="form-label fw-bold">Serviço 3 - Título:</label>
+                    <input type="hidden" name="chave" value="servicos.apoio.titulo">
+                    <label class="form-label fw-bold">Serviço 6 - Título:</label>
                     <div class="input-group">
-                        <input type="text" name="texto" class="form-control" th:value="${textos['servicos.convivencia.titulo']}">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['servicos.apoio.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
                     </div>
                 </form>
                 <form th:action="@{/admin}" method="POST">
-                    <input type="hidden" name="chave" value="servicos.convivencia.texto">
-                    <label class="form-label fw-bold">Serviço 3 - Descrição:</label>
+                    <input type="hidden" name="chave" value="servicos.apoio.texto">
+                    <label class="form-label fw-bold">Serviço 6 - Descrição:</label>
                     <div class="input-group">
-                        <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.convivencia.texto']}"></textarea>
+                        <textarea name="texto" class="form-control" rows="2" th:text="${textos['servicos.apoio.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
                     </div>
                 </form>
@@ -140,7 +220,7 @@
             <div class="card-body">
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="ajudar.doar.titulo">
-                    <label class="form-label fw-bold">Bloco Doador - Título:</label>
+                    <label class="form-label fw-bold">Bloco Doação Financeira - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['ajudar.doar.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -148,7 +228,7 @@
                 </form>
                 <form th:action="@{/admin}" method="POST" class="mb-4">
                     <input type="hidden" name="chave" value="ajudar.doar.texto">
-                    <label class="form-label fw-bold">Bloco Doador - Descrição:</label>
+                    <label class="form-label fw-bold">Bloco Doação Financeira - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['ajudar.doar.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -157,7 +237,7 @@
 
                 <form th:action="@{/admin}" method="POST" class="mb-3">
                     <input type="hidden" name="chave" value="ajudar.voluntario.titulo">
-                    <label class="form-label fw-bold">Bloco Voluntário - Título:</label>
+                    <label class="form-label fw-bold">Trabalho Voluntário - Título:</label>
                     <div class="input-group">
                         <input type="text" name="texto" class="form-control" th:value="${textos['ajudar.voluntario.titulo']}">
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
@@ -165,14 +245,33 @@
                 </form>
                 <form th:action="@{/admin}" method="POST">
                     <input type="hidden" name="chave" value="ajudar.voluntario.texto">
-                    <label class="form-label fw-bold">Bloco Voluntário - Descrição:</label>
+                    <label class="form-label fw-bold">Trabalho Voluntário - Descrição:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="2" th:text="${textos['ajudar.voluntario.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
                     </div>
                 </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="ajudar.produtos.titulo">
+                    <label class="form-label fw-bold">Doação de Produtos - Título:</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['ajudar.produtos.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST">
+                    <input type="hidden" name="chave" value="ajudar.produtos.texto">
+                    <label class="form-label fw-bold">Doação de Produtos - Descrição:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="2" th:text="${textos['ajudar.produtos.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
             </div>
         </div>
+
+
 
         <div class="card mb-4">
             <div class="card-header h3">Página: Sobre Nós</div>
@@ -210,6 +309,48 @@
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+        <!-- FOTO -->
+        <div class="card mb-4">
+            <div class="card-header">Foto: Quem Somos</div>
+            <div class="card-body">
+                <form th:action="@{/admin/substituir}" method="POST" enctype="multipart/form-data" class="mb-3">
+                    <input type="hidden" name="secao" value="quem-somos">
+                    
+                    <label class="form-label small fw-semibold d-block">Substituir Imagem Atual:</label>
+                    <div class="input-group">
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                        <button class="btn btn-custom-blue" type="submit">Atualizar</button>
+                    </div>
+                </form>
+                
+                <div class="text-center">
+                    <span class="small text-muted d-block mb-1">Prévia Atual:</span>
+                    <img th:src="${fotoQuemSomos != null ? fotoQuemSomos.urlCaminho : 'https://placehold.co/600x400?text=Sem+Foto'}" 
+                        class="img-thumbnail" style="max-height: 150px;" alt="Prévia Foto">
+                </div>
+            </div>
+        </div>
+        <!-- FOTO -->
+        <div class="card mb-4">
+            <div class="card-header">Foto: Nossa História</div>
+            <div class="card-body">
+                <form th:action="@{/admin/substituir}" method="POST" enctype="multipart/form-data" class="mb-3">
+                    <input type="hidden" name="secao" value="nossa-historia">
+                    
+                    <label class="form-label small fw-semibold d-block">Substituir Imagem Atual:</label>
+                    <div class="input-group">
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                        <button class="btn btn-custom-blue" type="submit">Atualizar</button>
+                    </div>
+                </form>
+                
+                <div class="text-center">
+                    <span class="small text-muted d-block mb-1">Prévia Atual:</span>
+                    <img th:src="${fotoNossaHistoria != null ? fotoNossaHistoria.urlCaminho : 'https://placehold.co/600x400?text=Sem+Foto'}" 
+                        class="img-thumbnail" style="max-height: 150px;" alt="Prévia Foto">
+                </div>
             </div>
         </div>
 
@@ -285,6 +426,69 @@
                 </form>
             </div>
         </div>
+        <!-- FOTO -->
+        <div class="card mb-4">
+            <div class="card-header">Foto: Doação de Alimentos</div>
+            <div class="card-body">
+                <form th:action="@{/admin/substituir}" method="POST" enctype="multipart/form-data" class="mb-3">
+                    <input type="hidden" name="secao" value="doacao-alimentos">
+                    
+                    <label class="form-label small fw-semibold d-block">Substituir Imagem Atual:</label>
+                    <div class="input-group">
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                        <button class="btn btn-custom-blue" type="submit">Atualizar</button>
+                    </div>
+                </form>
+                
+                <div class="text-center">
+                    <span class="small text-muted d-block mb-1">Prévia Atual:</span>
+                    <img th:src="${fotoDoacaoAlimentos != null ? fotoDoacaoAlimentos.urlCaminho : 'https://placehold.co/600x400?text=Sem+Foto'}" 
+                        class="img-thumbnail" style="max-height: 150px;" alt="Prévia Foto">
+                </div>
+            </div>
+        </div>
+        <!-- FOTO -->
+        <div class="card mb-4">
+            <div class="card-header">Foto: Recursos Financeiros</div>
+            <div class="card-body">
+                <form th:action="@{/admin/substituir}" method="POST" enctype="multipart/form-data" class="mb-3">
+                    <input type="hidden" name="secao" value="recursos-financeiros">
+                    
+                    <label class="form-label small fw-semibold d-block">Substituir Imagem Atual:</label>
+                    <div class="input-group">
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                        <button class="btn btn-custom-blue" type="submit">Atualizar</button>
+                    </div>
+                </form>
+                
+                <div class="text-center">
+                    <span class="small text-muted d-block mb-1">Prévia Atual:</span>
+                    <img th:src="${fotoRecursosFinanceiros != null ? fotoRecursosFinanceiros.urlCaminho : 'https://placehold.co/600x400?text=Sem+Foto'}" 
+                        class="img-thumbnail" style="max-height: 150px;" alt="Prévia Foto">
+                </div>
+            </div>
+        </div>
+        <!-- FOTO -->
+        <div class="card mb-4">
+            <div class="card-header">Foto: Trabalho Voluntário</div>
+            <div class="card-body">
+                <form th:action="@{/admin/substituir}" method="POST" enctype="multipart/form-data" class="mb-3">
+                    <input type="hidden" name="secao" value="trabalho-voluntario">
+                    
+                    <label class="form-label small fw-semibold d-block">Substituir Imagem Atual:</label>
+                    <div class="input-group">
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                        <button class="btn btn-custom-blue" type="submit">Atualizar</button>
+                    </div>
+                </form>
+                
+                <div class="text-center">
+                    <span class="small text-muted d-block mb-1">Prévia Atual:</span>
+                    <img th:src="${fotoTrabalhoVoluntario != null ? fotoTrabalhoVoluntario.urlCaminho : 'https://placehold.co/600x400?text=Sem+Foto'}" 
+                        class="img-thumbnail" style="max-height: 150px;" alt="Prévia Foto">
+                </div>
+            </div>
+        </div>
 
         <div class="card mb-4">
             <div class="card-header h3">Página: Doar Agora</div>
@@ -324,6 +528,27 @@
                 </form>
             </div>
         </div>
+        <!-- FOTO -->
+        <div class="card mb-4">
+            <div class="card-header">Foto: Doar Agora</div>
+            <div class="card-body">
+                <form th:action="@{/admin/substituir}" method="POST" enctype="multipart/form-data" class="mb-3">
+                    <input type="hidden" name="secao" value="doar-agora">
+                    
+                    <label class="form-label small fw-semibold d-block">Substituir Imagem Atual:</label>
+                    <div class="input-group">
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                        <button class="btn btn-custom-blue" type="submit">Atualizar</button>
+                    </div>
+                </form>
+                
+                <div class="text-center">
+                    <span class="small text-muted d-block mb-1">Prévia Atual:</span>
+                    <img th:src="${fotoDoarAgora != null ? fotoDoarAgora.urlCaminho : 'https://placehold.co/600x400?text=Sem+Foto'}" 
+                        class="img-thumbnail" style="max-height: 150px;" alt="Prévia Foto">
+                </div>
+            </div>
+        </div>
 
         <div class="card mb-4">
             <div class="card-header h3">Seção: Redes Sociais</div>
@@ -339,7 +564,7 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card mb-4">
             <div class="card-header h3">Contatos e Rodapé</div>
             <div class="card-body">
                 <form th:action="@{/admin}" method="POST" class="mb-3">
@@ -379,37 +604,39 @@
                 </form>
             </div>
         </div>
-    </div>
 
-    <!-- SEÇÃO: GALERIA DE FOTOS (TABELA MÍDIA) -->
-    <div class="card mb-4">
-        <div class="card-header">Gerenciar Galeria de Fotos Nativas</div>
-        <div class="card-body">
-            
-            <!-- Formulário de Upload -->
-            <form th:action="@{/admin/galeria/upload}" method="POST" enctype="multipart/form-data" class="mb-4">
-                <label class="form-label small fw-semibold">Adicionar Nova Foto à Galeria:</label>
-                <div class="input-group">
-                    <input type="file" name="imagem" class="form-control" accept="image/*" required>
-                    <button class="btn btn-custom-blue" type="submit">Enviar Foto</button>
-                </div>
-            </form>
+        <!-- SEÇÃO: GALERIA DE FOTOS (TABELA MÍDIA) -->
+        <div class="card mb-4">
+            <div class="card-header">Gerenciar Galeria de Fotos</div>
+            <div class="card-body">
+                
+                <!-- Formulário de Upload -->
+                <form th:action="@{/admin/galeria/upload}" method="POST" enctype="multipart/form-data" class="mb-4">
+                    <label class="form-label small fw-semibold">Adicionar Nova Foto à Galeria:</label>
+                    <div class="input-group">
+                        <input type="file" name="imagem" class="form-control" accept="image/*" required>
+                        <button class="btn btn-custom-blue" type="submit">Enviar Foto</button>
+                    </div>
+                </form>
 
-            <!-- Grade de Miniaturas com as fotos que já estão salvas no banco -->
-            <h6 class="fw-bold mb-3 small text-secondary">Fotos Atuais no Site:</h6>
-            <div class="row g-3">
-                <div class="col-6 col-md-3 text-center" th:each="midia : ${midias}">
-                    <div class="border rounded p-2">
-                        <img th:src="${midia.urlCaminho}" class="img-thumbnail mb-2" style="height: 100px; object-fit: cover; width: 100%;">
-                        <form th:action="@{/admin/excluir/{id}(id=${midia.id})}" th:method="delete" class="d-inline">
-                            <button type="submit" class="btn btn-danger btn-sm w-100" style="font-size: 0.8rem;">Excluir</button>
-                        </form>
+                <!-- Grade de Miniaturas com as fotos que já estão salvas no banco -->
+                <h6 class="fw-bold mb-3 small text-secondary">Fotos Atuais no Site:</h6>
+                <div class="row g-3">
+                    <div class="col-6 col-md-3 text-center" th:each="midia : ${midiasGaleria}">
+                        <div class="border rounded p-2">
+                            <img th:src="${midia.urlCaminho}" class="img-thumbnail mb-2" style="height: 100px; object-fit: cover; width: 100%;">
+                            <form th:action="@{/admin/excluir/{id}(id=${midia.id})}" th:method="delete" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm w-100" style="font-size: 0.8rem;">Excluir</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
+
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

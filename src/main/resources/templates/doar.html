@@ -95,7 +95,8 @@
             <div class="container text-center">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 hero-image-container m-0">
-                        <img src="../static/image/img-hero-0.PNG" th:src="@{/image/img-hero-0.PNG}" class="w-100 rounded-4 shadow img-fluid mb-4" alt="Idosos sorrindo expressando gratidão">
+                        <img th:src="${fotoDoarAgora != null ? fotoDoarAgora.urlCaminho : '/image/img-hero-0.PNG'}"
+                        class="w-100 rounded-4 shadow img-fluid mb-4" alt="Idosos sorrindo expressando gratidão">
                         <h3 class="h4 fw-bold text-dark mb-2">Agradecemos de Todo o Coração</h3>
                         <p class="text-muted m-0">Cada sorriso e cada dia de paz vivido na nossa casa é um reflexo direto da sua bondade.</p>
                     </div>
@@ -124,8 +125,9 @@
                             <i class="bi bi-whatsapp me-2"></i> (73) 8113-2731</a>
                         </li>
                         <li class="mb-2">
-                            <i class="bi bi-envelope-fill me-2"></i> 
-                            <span th:text="${textos['contato.email']}">lardeidososasvp@gmail.com</span>
+                            <a href="mailto:lardeidososasvp@gmail.com" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-envelope-fill me-2"></i>
+                            <span th:text="${textos['contato.email']}">lardeidososasvp@gmail.com</span></a>
                         </li>
                     </ul>
                 </div>

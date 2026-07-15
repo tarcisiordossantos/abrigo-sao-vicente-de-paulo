@@ -58,12 +58,13 @@
             <div class="container">
                 <div class="row align-items-center g-5">
                     <div class="col-12 col-md-6 hero-image-container m-0">
-                        <img src="../static/image/img-hero-0.PNG" th:src="@{/image/img-hero-1.PNG}" class="w-100 rounded-4 shadow img-fluid" alt="Doação de insumos">
+                        <img th:src="${fotoDoacaoAlimentos != null ? fotoDoacaoAlimentos.urlCaminho : '/image/img-hero-0.PNG'}" 
+                        class="w-100 rounded-4 shadow img-fluid" alt="Doação de insumos">
                     </div>
                     <div class="col-12 col-md-6 text-start">
                         <h2 class="section-title text-start mb-3" th:text="${textos['comoajudar.alimentos.titulo']}">Doação de Alimentos e Insumos</h2>
                         <p class="hero-text mb-4" th:text="${textos['comoajudar.alimentos.texto']}">O abrigo consome diariamente uma grande quantidade de mantimentos. Itens não perecíveis, materiais de higiene pessoal (como fraldas geriátricas) e produtos de limpeza são cruciais para a nossa rotina.</p>
-                        <button class="btn btn-custom-blue rounded-pill px-4 fw-semibold">Ver Lista de Necessidades</button>
+                        <a class="btn btn-custom-blue rounded-pill px-4 fw-semibold" th:href="@{/contato}">Entrar em Contato</a>
                     </div>
                 </div>
             </div>
@@ -75,10 +76,11 @@
                     <div class="col-12 col-md-6 text-start order-2 order-md-1">
                         <h2 class="section-title text-start mb-3" th:text="${textos['comoajudar.financeiro.titulo']}">Recursos Financeiros</h2>
                         <p class="hero-text mb-4" th:text="${textos['comoajudar.financeiro.texto']}">As contribuições em dinheiro nos dão a flexibilidade necessária para adquirir medicamentos de uso controlado urgentes, cobrir exames de emergência e arcar com a manutenção predial e funcional da casa.</p>
-                        <a class="btn btn-custom-green rounded-pill px-4 fw-bold" th:href="@{/doar}">DOAR VIA PIX </a>
+                        <a class="btn btn-custom-green rounded-pill px-4 fw-bold" th:href="@{/doar}">DOAR AGORA </a>
                     </div>
                     <div class="col-12 col-md-6 hero-image-container m-0 order-1 order-md-2">
-                        <img src="../static/image/img-hero-1.PNG" th:src="@{/image/img-hero-1.PNG}" class="w-100 rounded-4 shadow img-fluid" alt="Doações financeiras">
+                        <img th:src="${fotoRecursosFinanceiros != null ? fotoRecursosFinanceiros.urlCaminho : '/image/img-hero-0.PNG'}" 
+                        class="w-100 rounded-4 shadow img-fluid" alt="Doações financeiras">
                     </div>
                 </div>
             </div>
@@ -88,7 +90,8 @@
             <div class="container">
                 <div class="row align-items-center g-5">
                     <div class="col-12 col-md-6 hero-image-container m-0">
-                        <img src="../static/image/img-hero-1.PNG" th:src="@{/image/img-hero-1.PNG}" class="w-100 rounded-4 shadow img-fluid" alt="Trabalho voluntário">
+                        <img th:src="${fotoTrabalhoVoluntario != null ? fotoTrabalhoVoluntario.urlCaminho : '/image/img-hero-0.PNG'}" 
+                        class="w-100 rounded-4 shadow img-fluid" alt="Trabalho voluntário">
                     </div>
                     <div class="col-12 col-md-6 text-start">
                         <h2 class="section-title text-start mb-3" th:text="${textos['comoajudar.voluntario.titulo']}">Trabalho Voluntário</h2>
@@ -120,8 +123,9 @@
                             <i class="bi bi-whatsapp me-2"></i> (73) 8113-2731</a>
                         </li>
                         <li class="mb-2">
-                            <i class="bi bi-envelope-fill me-2"></i> 
-                            <span th:text="${textos['contato.email']}">lardeidososasvp@gmail.com</span>
+                            <a href="mailto:lardeidososasvp@gmail.com" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-envelope-fill me-2"></i>
+                            <span th:text="${textos['contato.email']}">lardeidososasvp@gmail.com</span></a>
                         </li>
                     </ul>
                 </div>

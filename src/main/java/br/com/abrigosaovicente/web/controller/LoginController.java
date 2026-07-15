@@ -61,13 +61,27 @@ public class LoginController {
         }
 
         List<Conteudo> conteudos = conteudoRepository.findAll();
-        List<Midia> midias = midiaRepository.findAll();
+        List<Midia> midiasCarrossel = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
+        List<Midia> midiasGaleria = midiaRepository.findBySecaoAndAtivoTrue("galeria");
+        Midia fotoQuemSomos = midiaRepository.findBySecao("quem-somos").orElse(null);
+        Midia fotoNossaHistoria = midiaRepository.findBySecao("nossa-historia").orElse(null);
+        Midia fotoDoacaoAlimentos = midiaRepository.findBySecao("doacao-alimentos").orElse(null);
+        Midia fotoRecursosFinanceiros = midiaRepository.findBySecao("recursos-financeiros").orElse(null);
+        Midia fotoTrabalhoVoluntario = midiaRepository.findBySecao("trabalho-voluntario").orElse(null);
+        Midia fotoDoarAgora = midiaRepository.findBySecao("doar-agora").orElse(null);
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
 
         model.addAttribute("textos", textos);
-        model.addAttribute("midias", midias);
+        model.addAttribute("midiasCarrossel", midiasCarrossel);
+        model.addAttribute("midiasGaleria", midiasGaleria);
+        model.addAttribute("fotoQuemSomos", fotoQuemSomos);
+        model.addAttribute("fotoNossaHistoria", fotoNossaHistoria);
+        model.addAttribute("fotoDoacaoAlimentos", fotoDoacaoAlimentos);
+        model.addAttribute("fotoRecursosFinanceiros", fotoRecursosFinanceiros);
+        model.addAttribute("fotoTrabalhoVoluntario", fotoTrabalhoVoluntario);
+        model.addAttribute("fotoDoarAgora", fotoDoarAgora);
 
         return "admin";
     }
@@ -92,8 +106,24 @@ public class LoginController {
 
 
 
+    @PostMapping("/admin/carrossel/upload")
+    public String realizarUploadCarrossel(@RequestParam MultipartFile imagem){
+
+        if (!imagem.isEmpty()){
+            String urlDaImagem = uploadService.salvarArquivo(imagem);
+
+            Midia novaMidia = new Midia();
+            novaMidia.setUrlCaminho(urlDaImagem);
+            novaMidia.setSecao("carrossel");
+
+            midiaRepository.save(novaMidia);
+        }
+
+        return "redirect:/admin?sucesso=true";
+    }
+    
     @PostMapping("/admin/galeria/upload")
-    public String realizarUpload(@RequestParam MultipartFile imagem){
+    public String realizarUploadGaleria(@RequestParam MultipartFile imagem){
 
         if (!imagem.isEmpty()){
             String urlDaImagem = uploadService.salvarArquivo(imagem);
@@ -105,6 +135,33 @@ public class LoginController {
             midiaRepository.save(novaMidia);
         }
 
+        return "redirect:/admin?sucesso=true";
+    }
+
+    @PostMapping("/admin/substituir")
+    public String substituirFotoUnica(@RequestParam String secao, @RequestParam MultipartFile imagem) {
+        
+        if (!imagem.isEmpty()) {
+            Optional<Midia> midiaExistente = midiaRepository.findBySecao(secao);
+            
+            String caminhoNovoArquivo = uploadService.salvarArquivo(imagem);
+            
+            if (midiaExistente.isPresent()) {
+                Midia midiaAntiga = midiaExistente.get();
+                
+                uploadService.excluirArquivoFisico(midiaAntiga.getUrlCaminho());
+                
+                midiaAntiga.setUrlCaminho(caminhoNovoArquivo);
+                midiaRepository.save(midiaAntiga);
+                
+            } else {
+                Midia novaMidia = new Midia();
+                novaMidia.setUrlCaminho(caminhoNovoArquivo);
+                novaMidia.setSecao(secao);
+                midiaRepository.save(novaMidia);
+            }
+        }
+        
         return "redirect:/admin?sucesso=true";
     }
 
