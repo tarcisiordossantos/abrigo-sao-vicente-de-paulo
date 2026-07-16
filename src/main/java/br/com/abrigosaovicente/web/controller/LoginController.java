@@ -63,12 +63,12 @@ public class LoginController {
         List<Conteudo> conteudos = conteudoRepository.findAll();
         List<Midia> midiasCarrossel = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
         List<Midia> midiasGaleria = midiaRepository.findBySecaoAndAtivoTrue("galeria");
-        Midia fotoQuemSomos = midiaRepository.findBySecao("quem-somos").orElse(null);
-        Midia fotoNossaHistoria = midiaRepository.findBySecao("nossa-historia").orElse(null);
-        Midia fotoDoacaoAlimentos = midiaRepository.findBySecao("doacao-alimentos").orElse(null);
-        Midia fotoRecursosFinanceiros = midiaRepository.findBySecao("recursos-financeiros").orElse(null);
-        Midia fotoTrabalhoVoluntario = midiaRepository.findBySecao("trabalho-voluntario").orElse(null);
-        Midia fotoDoarAgora = midiaRepository.findBySecao("doar-agora").orElse(null);
+        Midia fotoQuemSomos = midiaRepository.findFirstBySecao("quem-somos").orElse(null);
+        Midia fotoNossaHistoria = midiaRepository.findFirstBySecao("nossa-historia").orElse(null);
+        Midia fotoDoacaoAlimentos = midiaRepository.findFirstBySecao("doacao-alimentos").orElse(null);
+        Midia fotoRecursosFinanceiros = midiaRepository.findFirstBySecao("recursos-financeiros").orElse(null);
+        Midia fotoTrabalhoVoluntario = midiaRepository.findFirstBySecao("trabalho-voluntario").orElse(null);
+        Midia fotoDoarAgora = midiaRepository.findFirstBySecao("doar-agora").orElse(null);
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
@@ -107,7 +107,11 @@ public class LoginController {
 
 
     @PostMapping("/admin/carrossel/upload")
-    public String realizarUploadCarrossel(@RequestParam MultipartFile imagem){
+    public String realizarUploadCarrossel(@RequestParam MultipartFile imagem, HttpSession session){
+
+        if (session.getAttribute("usuarioLogado") == null){
+            return "redirect:/login";
+        }
 
         if (!imagem.isEmpty()){
             String urlDaImagem = uploadService.salvarArquivo(imagem);
@@ -123,7 +127,11 @@ public class LoginController {
     }
     
     @PostMapping("/admin/galeria/upload")
-    public String realizarUploadGaleria(@RequestParam MultipartFile imagem){
+    public String realizarUploadGaleria(@RequestParam MultipartFile imagem, HttpSession session){
+
+        if (session.getAttribute("usuarioLogado") == null){
+            return "redirect:/login";
+        }
 
         if (!imagem.isEmpty()){
             String urlDaImagem = uploadService.salvarArquivo(imagem);
@@ -139,10 +147,14 @@ public class LoginController {
     }
 
     @PostMapping("/admin/substituir")
-    public String substituirFotoUnica(@RequestParam String secao, @RequestParam MultipartFile imagem) {
+    public String substituirFotoUnica(@RequestParam String secao, @RequestParam MultipartFile imagem, HttpSession session) {
         
+        if (session.getAttribute("usuarioLogado") == null){
+            return "redirect:/login";
+        }
+
         if (!imagem.isEmpty()) {
-            Optional<Midia> midiaExistente = midiaRepository.findBySecao(secao);
+            Optional<Midia> midiaExistente = midiaRepository.findFirstBySecao(secao);
             
             String caminhoNovoArquivo = uploadService.salvarArquivo(imagem);
             
@@ -166,7 +178,12 @@ public class LoginController {
     }
 
     @DeleteMapping("/admin/excluir/{id}")
-    public String excluirImagem(@PathVariable Long id){
+    public String excluirImagem(@PathVariable Long id, HttpSession session){
+
+        if (session.getAttribute("usuarioLogado") == null){
+            return "redirect:/login";
+        }
+
 
         Optional<Midia> midia = midiaRepository.findById(id);
 

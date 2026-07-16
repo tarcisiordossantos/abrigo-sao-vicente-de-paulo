@@ -22,7 +22,7 @@
                     </div>
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <button class="navbar-toggler mt-2 mt-lg-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -94,7 +94,7 @@
                             <div class="mb-4">
                                 <label for="mensagem" class="form-label fw-semibold small">Mensagem:</label>
                                 <textarea th:field="*{mensagem}" class="form-control" rows="4" placeholder="Escreva sua mensagem aqui..." required></textarea>
-                                <div th:if="${#fields.hasErrors('assunto')}" class="text-danger small mt-1">
+                                <div th:if="${#fields.hasErrors('mensagem')}" class="text-danger small mt-1">
                                     Por favor, deve preencher a mensagem.
                                 </div>
                             </div>

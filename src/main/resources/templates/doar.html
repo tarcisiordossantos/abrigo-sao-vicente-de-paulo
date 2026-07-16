@@ -22,7 +22,7 @@
                     </div>
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <button class="navbar-toggler mt-2 mt-lg-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -60,14 +60,14 @@
                     
                     <div class="col-12 col-md-5 text-start">
                         <div class="card bg-white border border-2 border-success shadow rounded-4 px-4 py-5 m-0">
-                            <p class="text-success fw-bold uppercase small mb-2"><i class="bi bi-qr-code-scan me-2"></i>CONTRIBUIÇÃO VIA PIX (CNPJ)</p>
+                            <p class="text-success fw-bold text-uppercase small mb-2"><i class="bi bi-qr-code-scan me-2"></i>CONTRIBUIÇÃO VIA PIX (CNPJ)</p>
                             
                             <div class="bg-light p-3 rounded-3 border d-flex align-items-center justify-content-between mb-2" 
                                  onclick="copiarPix()" 
                                  style="cursor: pointer;" 
                                  title="Clique para copiar a chave">
                                 <span id="chavePix" class="fw-bold fs-5 text-dark">14.173.181/0001-62</span>
-                                <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-copy"></i> Copiar</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-copy"></i> Copiar</button>
                             </div>
                             
                             <div id="alertaCopia" class="alert alert-success py-1 small m-0 text-center d-none" role="alert">

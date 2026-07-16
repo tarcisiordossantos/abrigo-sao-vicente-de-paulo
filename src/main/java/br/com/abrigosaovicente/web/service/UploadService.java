@@ -13,23 +13,27 @@ public class UploadService {
     @Value("${app.upload.diretorio}")
     private String diretorioDestino;
 
+
+
     public String salvarArquivo(MultipartFile arquivo) {
         try {
-            // Cria a pasta física se ela não existir no servidor
             Path pasta = Paths.get(diretorioDestino);
             if (!Files.exists(pasta)) {
                 Files.createDirectories(pasta);
             }
 
-            // Gera um nome único universal para a foto não sobrescrever outra
-            String extensao = arquivo.getOriginalFilename().substring(arquivo.getOriginalFilename().lastIndexOf("."));
+            String nomeOriginal = arquivo.getOriginalFilename();
+            String extensao = ".jpg";
+
+            if (nomeOriginal != null && nomeOriginal.contains(".")) {
+                extensao = nomeOriginal.substring(nomeOriginal.lastIndexOf("."));
+            }
+
             String nomeFinal = UUID.randomUUID().toString() + extensao;
             Path caminhoCompleto = pasta.resolve(nomeFinal);
 
-            // Transfere os bytes diretamente da rede para o disco
             Files.copy(arquivo.getInputStream(), caminhoCompleto, StandardCopyOption.REPLACE_EXISTING);
 
-            // Retorna apenas a URL relativa que o navegador usará para ler a foto
             return "/uploads/" + nomeFinal;
 
         } catch (IOException e) {

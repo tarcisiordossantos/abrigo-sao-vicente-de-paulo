@@ -47,8 +47,8 @@ public class HomeController {
     public String buscarSobreNos(Model model){
         List<Conteudo> conteudos = conteudoRepository.findAll();
         List<Midia> galeria = midiaRepository.findBySecaoAndAtivoTrue("galeria");
-        Midia fotoQuemSomos = midiaRepository.findBySecao("quem-somos").orElse(null);
-        Midia fotoNossaHistoria = midiaRepository.findBySecao("nossa-historia").orElse(null);
+        Midia fotoQuemSomos = midiaRepository.findFirstBySecao("quem-somos").orElse(null);
+        Midia fotoNossaHistoria = midiaRepository.findFirstBySecao("nossa-historia").orElse(null);
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
@@ -66,9 +66,9 @@ public class HomeController {
     @GetMapping("/ajudar")
     public String buscarComoAjudar(Model model){
         List<Conteudo> conteudos = conteudoRepository.findAll();
-        Midia fotoDoacaoAlimentos = midiaRepository.findBySecao("doacao-alimentos").orElse(null);
-        Midia fotoRecursosFinanceiros = midiaRepository.findBySecao("recursos-financeiros").orElse(null);
-        Midia fotoTrabalhoVoluntario = midiaRepository.findBySecao("trabalho-voluntario").orElse(null);
+        Midia fotoDoacaoAlimentos = midiaRepository.findFirstBySecao("doacao-alimentos").orElse(null);
+        Midia fotoRecursosFinanceiros = midiaRepository.findFirstBySecao("recursos-financeiros").orElse(null);
+        Midia fotoTrabalhoVoluntario = midiaRepository.findFirstBySecao("trabalho-voluntario").orElse(null);
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
@@ -119,7 +119,7 @@ public class HomeController {
     @GetMapping("/doar")
     public String buscarDoar(Model model){
         List<Conteudo> conteudos = conteudoRepository.findAll();
-        Midia fotoDoarAgora = midiaRepository.findBySecao("doar-agora").orElse(null);
+        Midia fotoDoarAgora = midiaRepository.findFirstBySecao("doar-agora").orElse(null);
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
