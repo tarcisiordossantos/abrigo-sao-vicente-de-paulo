@@ -4,18 +4,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.abrigosaovicente.web.controller.dto.ContatoForm;
 import br.com.abrigosaovicente.web.model.Conteudo;
 import br.com.abrigosaovicente.web.model.Midia;
+import br.com.abrigosaovicente.web.model.Noticia;
 import br.com.abrigosaovicente.web.repository.ConteudoRepository;
 import br.com.abrigosaovicente.web.repository.MidiaRepository;
+import br.com.abrigosaovicente.web.repository.NoticiaRepository;
 import br.com.abrigosaovicente.web.service.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +33,7 @@ public class HomeController {
     private final ConteudoRepository conteudoRepository;
     private final MidiaRepository midiaRepository;
     private final EmailService emailService;
+    private final NoticiaRepository noticiaRepository;
 
     @GetMapping("/")
     public String buscar(Model model){
@@ -128,6 +136,28 @@ public class HomeController {
         model.addAttribute("fotoDoarAgora", fotoDoarAgora);
 
         return "doar";
+    }
+
+
+
+    @GetMapping("/noticias")
+    public String listarNoticias(@RequestParam(defaultValue = "0") int page, Model model) {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by("dataCriacao").descending());
+        
+        Page<Noticia> paginaNoticias = noticiaRepository.findAll(pageable);
+
+        model.addAttribute("noticias", paginaNoticias.getContent());
+        model.addAttribute("paginaAtual", page);
+        model.addAttribute("totalPaginas", paginaNoticias.getTotalPages());
+
+        List<Conteudo> conteudos = conteudoRepository.findAll();
+        Map<String, String> textos = conteudos.stream()
+            .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
+        model.addAttribute("textos", textos);
+
+        model.addAttribute("textos", textos);
+
+        return "noticias";
     }
     
 }

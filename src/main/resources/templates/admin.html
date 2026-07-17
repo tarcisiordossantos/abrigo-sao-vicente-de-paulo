@@ -30,9 +30,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-lg-center">
-                        <li class="nav-item"><a class="nav-link active px-3" th:href="@{/}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-3" th:href="@{/sobre}">Sobre Nós</a></li>
                         <li class="nav-item"><a class="nav-link px-3" th:href="@{/ajudar}">Como Ajudar</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/noticias}">Notícias</a></li>
                         <li class="nav-item"><a class="nav-link px-3 me-2" th:href="@{/contato}">Contato</a></li>
                         <li class="nav-item mt-2 mt-lg-0">
                             <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" th:href="@{/doar}">DOAR AGORA</a>
@@ -602,6 +603,69 @@
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- SEÇÃO: GERENCIAR NOTÍCIAS -->
+        <div class="card mb-4">
+            <div class="card-header h3">Gerenciar Notícias do Abrigo</div>
+            <div class="card-body">
+                
+                <form th:action="@{/admin/noticias/salvar}" method="POST" enctype="multipart/form-data" class="mb-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small text-secondary">Título da Notícia:</label>
+                        <input type="text" name="titulo" class="form-control" placeholder="Ex: Campanha de agasalhos começa nesta semana" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small text-secondary">Texto da Notícia:</label>
+                        <textarea name="texto" class="form-control" rows="4" placeholder="Escreva o conteúdo completo da notícia..." required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small text-secondary">Imagem da Notícia (Opcional):</label>
+                        <input type="file" name="imagem" class="form-control" accept="image/*">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-custom-blue rounded-pill px-4 py-2">Publicar Notícia</button>
+                </form>
+
+                <hr class="my-4">
+
+                <h6 class="fw-bold mb-3 text-secondary">Notícias Publicadas Atualmente:</h6>
+                
+                <div th:if="${#lists.isEmpty(noticias)}" class="text-center py-3">
+                    <p class="text-muted small m-0">Nenhuma notícia cadastrada ainda.</p>
+                </div>
+                
+                <div th:unless="${#lists.isEmpty(noticias)}" class="table-responsive">
+                    <table class="table table-hover align-middle small">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Data</th>
+                                <th style="width: 15%;">Imagem</th>
+                                <th>Título</th>
+                                <th style="width: 15%;" class="text-end">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="noticia : ${noticias}">
+                                <td th:text="${#temporals.format(noticia.dataCriacao, 'dd/MM/yyyy')}">16/07/2026</td>
+                                <td>
+                                    <img th:if="${noticia.urlImagem != null}" th:src="${noticia.urlImagem}" class="img-thumbnail" style="height: 40px; width: 60px; object-fit: cover;">
+                                    <span th:unless="${noticia.urlImagem != null}" class="text-muted fst-italic">Sem foto</span>
+                                </td>
+                                <td class="fw-semibold text-dark text-start" th:text="${noticia.titulo}">Título da Notícia</td>
+                                <td class="text-end">
+                                    <form th:action="@{/admin/noticias/excluir/{id}(id=${noticia.id})}" th:method="delete" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm" style="font-size: 0.8rem;">Excluir</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
 

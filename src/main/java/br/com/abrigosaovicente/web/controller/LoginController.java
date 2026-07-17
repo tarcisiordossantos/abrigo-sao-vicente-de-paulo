@@ -1,6 +1,8 @@
 package br.com.abrigosaovicente.web.controller;
 
 import br.com.abrigosaovicente.web.repository.MidiaRepository;
+import br.com.abrigosaovicente.web.repository.NoticiaRepository;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.abrigosaovicente.web.model.Conteudo;
 import br.com.abrigosaovicente.web.model.Midia;
+import br.com.abrigosaovicente.web.model.Noticia;
 import br.com.abrigosaovicente.web.repository.ConteudoRepository;
 import br.com.abrigosaovicente.web.service.UploadService;
 import jakarta.persistence.EntityNotFoundException;
@@ -29,6 +32,7 @@ public class LoginController {
     private final MidiaRepository midiaRepository;
     private final ConteudoRepository conteudoRepository;
     private final UploadService uploadService;
+    private final NoticiaRepository noticiaRepository;
 
 
 
@@ -69,6 +73,7 @@ public class LoginController {
         Midia fotoRecursosFinanceiros = midiaRepository.findFirstBySecao("recursos-financeiros").orElse(null);
         Midia fotoTrabalhoVoluntario = midiaRepository.findFirstBySecao("trabalho-voluntario").orElse(null);
         Midia fotoDoarAgora = midiaRepository.findFirstBySecao("doar-agora").orElse(null);
+        List<Noticia> noticias = noticiaRepository.findAll();
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
@@ -82,6 +87,7 @@ public class LoginController {
         model.addAttribute("fotoRecursosFinanceiros", fotoRecursosFinanceiros);
         model.addAttribute("fotoTrabalhoVoluntario", fotoTrabalhoVoluntario);
         model.addAttribute("fotoDoarAgora", fotoDoarAgora);
+        model.addAttribute("noticias", noticias);
 
         return "admin";
     }
@@ -193,6 +199,55 @@ public class LoginController {
             uploadService.excluirArquivoFisico(m.getUrlCaminho());
 
             midiaRepository.deleteById(id);
+        }
+
+        return "redirect:/admin?sucesso=true";
+    }
+
+
+
+    @PostMapping("/admin/noticias/salvar")
+    public String salvarNoticia(@RequestParam String titulo, 
+                                @RequestParam String texto, 
+                                @RequestParam MultipartFile imagem, 
+                                HttpSession session) {
+        
+        if (session.getAttribute("usuarioLogado") == null) {
+            return "redirect:/login";
+        }
+
+        Noticia noticia = new Noticia();
+        noticia.setTitulo(titulo);
+        noticia.setTexto(texto);
+
+        if (!imagem.isEmpty()) {
+            String urlImagem = uploadService.salvarArquivo(imagem);
+            noticia.setUrlImagem(urlImagem);
+        }
+
+        noticiaRepository.save(noticia);
+
+        return "redirect:/admin?sucesso=true";
+    }
+
+
+
+    @DeleteMapping("/admin/noticias/excluir/{id}")
+    public String excluirNoticia(@PathVariable Long id, HttpSession session) {
+        if (session.getAttribute("usuarioLogado") == null){
+            return "redirect:/login";
+        }
+
+        Optional<Noticia> noticiaOptional = noticiaRepository.findById(id);
+
+        if (noticiaOptional.isPresent()) {
+            Noticia noticia = noticiaOptional.get();
+            
+            if (noticia.getUrlImagem() != null) {
+                uploadService.excluirArquivoFisico(noticia.getUrlImagem());
+            }
+            
+            noticiaRepository.deleteById(id);
         }
 
         return "redirect:/admin?sucesso=true";

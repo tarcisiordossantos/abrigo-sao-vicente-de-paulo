@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Nós - Abrigo São Vicente de Paulo de Ilhéus</title>
+    <title>Notícias - Abrigo São Vicente de Paulo de Ilhéus</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{/css/estilos.css}">
@@ -28,9 +28,9 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-lg-center">
                         <li class="nav-item"><a class="nav-link px-3" th:href="@{/}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link active px-3" href="#">Sobre Nós</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/sobre}">Sobre Nós</a></li>
                         <li class="nav-item"><a class="nav-link px-3" th:href="@{/ajudar}">Como Ajudar</a></li>
-                        <li class="nav-item"><a class="nav-link px-3" th:href="@{/noticias}">Notícias</a></li>
+                        <li class="nav-item"><a class="nav-link active px-3" href="#">Notícias</a></li>
                         <li class="nav-item"><a class="nav-link px-3 me-2" th:href="@{/contato}">Contato</a></li>
                         <li class="nav-item mt-2 mt-lg-0">
                             <a class="btn btn-custom-green px-4 py-2 rounded-pill fw-bold" th:href="@{/doar}">DOAR AGORA</a>
@@ -48,94 +48,86 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-10">
-                        <h1 class="hero-title" th:text="${textos['sobre.titulo']}">Nosso Legado Vivo de Amor</h1>
+                        <h1 class="hero-title">Notícias do Abrigo</h1>
+                        <p class="hero-text m-0">Acompanhe as novidades, eventos e o dia a dia repleto de cuidado e carinho dos nossos idosos.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-5">
-            <div class="container">
-                <div class="row align-items-center g-5">
-                    <div class="col-12 col-md-6 hero-image-container m-0">
-                        <img th:src="${fotoQuemSomos != null ? fotoQuemSomos.urlCaminho : '/image/img-hero-0.PNG'}" 
-                        class="w-100 rounded-4 shadow img-fluid" alt="Quem Somos">
-                    </div>
-                    <div class="col-12 col-md-6 text-start">
-                        <h2 class="section-title text-start mb-3" th:text="${textos['sobre.quemsomos.titulo']}">Quem Somos</h2>
-                        <p class="hero-text m-0" style="text-align: justify;" th:text="${textos['sobre.quemsomos.texto']}">O Abrigo São Vicente de Ilhéus é mantido pela Sociedade São Vicente de Paulo e há mais de 100 anos dedica-se ao acolhimento integral de idosos, oferecendo assistência social, cuidados de saúde, alimentação, lazer e convivência comunitária.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- SEÇÃO PRINCIPAL DE NOTÍCIAS -->
         <section class="py-5 bg-white">
-            <div class="container">
-                <div class="row align-items-center g-5">
-                    <div class="col-12 col-md-6 text-start order-2 order-md-1">
-                        <h2 class="section-title text-start mb-3" th:text="${textos['sobre.historia.titulo']}">Nossa História</h2>
-                        <p class="hero-text m-0" style="text-align: justify;" th:text="${textos['sobre.historia.texto']}">Fundada em 10 de setembro de 1916 pelos membros vicentinos de Ilhéus, a instituição consolidou-se como um pilar essencial de solidariedade comunitária há mais de um século. Dedicamo-nos historicamente a transformar o apoio da sociedade civil e o trabalho voluntário em um refúgio seguro, digno e fraterno para idosos carentes ou em situação de vulnerabilidade social.</p>
-                    </div>
-                    <div class="col-12 col-md-6 hero-image-container m-0 order-1 order-md-2">
-                        <img th:src="${fotoNossaHistoria != null ? fotoNossaHistoria.urlCaminho : '/image/img-hero-1.PNG'}" 
-                        class="w-100 rounded-4 shadow img-fluid" alt="Nossa História">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- GALERIA -->
-        <section class="bg-white">
-            <div class="container">
-                <div class="text-center mb-4">
-                    <h3 class="section-title mb-3">Momentos que Inspiram</h3>
+            <div class="container" style="max-width: 850px;">
+                
+                <div th:if="${#lists.isEmpty(noticias)}" class="text-center py-5">
+                    <i class="bi bi-newspaper text-muted" style="font-size: 3rem;"></i>
+                    <p class="text-muted mt-3">Nenhuma notícia publicada no momento. Volte em breve!</p>
                 </div>
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-                    <div class="col" th:each="midia : ${galeria}">
+                <div th:unless="${#lists.isEmpty(noticias)}">
+                    
+                    <article th:each="noticia : ${noticias}" class="row align-items-center g-4 mb-5 pb-5 border-bottom">
                         
-                        <div class="overflow-hidden rounded-3 shadow-sm" 
-                            data-bs-toggle="modal" 
-                            th:data-bs-target="'#fotoModal' + ${midia.id}" 
-                            style="cursor: pointer;">
-                            <img th:src="${midia.urlCaminho}" class="img-fluid w-100 object-fit-cover" style="height: 240px;" alt="Foto do Abrigo São Vicente">
-                        </div>
+                        <div class="col-12 col-md-4" th:if="${noticia.urlImagem != null}">
+                            
+                            <div class="overflow-hidden rounded-3 shadow-sm" 
+                                data-bs-toggle="modal" 
+                                th:data-bs-target="'#noticiaModal' + ${noticia.id}" 
+                                style="cursor: pointer;">
+                                <img th:src="${noticia.urlImagem}" class="img-fluid w-100 object-fit-cover" alt="Imagem da Notícia">
+                            </div>
 
-                        <div class="modal fade" th:id="'fotoModal' + ${midia.id}" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content bg-transparent border-0">
-                                    <div class="modal-body p-0 position-relative text-center">
-                                        
-                                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        
-                                        <img th:src="${midia.urlCaminho}" class="img-fluid rounded-3 shadow-lg" alt="Foto Ampliada">
+                            <div class="modal fade" th:id="'noticiaModal' + ${noticia.id}" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content bg-transparent border-0">
+                                        <div class="modal-body p-0 position-relative text-center">
+                                            
+                                            <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            
+                                            <img th:src="${noticia.urlImagem}" class="img-fluid rounded-3 shadow-lg" alt="Foto Ampliada">
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- REDES SOCIAIS -->
-        <section id="redes-sociais">
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="section-title" th:text="${textos['redes.titulo']}">Entre em Contato</h2>
-                        <div class="social-icons mb-3">
-                            <a href="https://www.instagram.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
-                            <a href="https://wa.me/557381132731" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp"></i></a>
-                            <a href="https://www.facebook.com/abrigosaovicenteilheus/" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
+                        <div class="col-12" th:classappend="${noticia.urlImagem != null} ? 'col-md-8' : 'col-md-12'">
+                            <div class="text-start">
+                                <div class="d-flex align-items-center text-muted small mb-2">
+                                    <i class="bi bi-calendar3 me-2 text-primary"></i>
+                                    <span th:text="${#temporals.format(noticia.dataCriacao, 'dd/MM/yyyy')}">15/07/2026</span>
+                                </div>
+                                <h2 class="h4 fw-bold text-dark mb-2" th:text="${noticia.titulo}">Título Exemplo da Notícia</h2>
+                                <p class="text-muted small m-0" style="text-align: justify; white-space: pre-line;" th:text="${noticia.texto}">Corpo explicativo do texto da notícia...</p>
+                            </div>
                         </div>
-                        <a href="mailto:lardeidososasvp@gmail.com"><i class="bi bi-envelope-at me-1"></i>lardeidososasvp@gmail.com</a>
-                    </div>
+
+                    </article>
+
+                    <nav th:if="${totalPaginas > 1}" class="d-flex justify-content-between align-items-center mt-4 mb-5" aria-label="Navegação de notícias">
+                        <a th:href="@{/noticias(page=${paginaAtual - 1})}" 
+                           class="btn btn-sm btn-outline-secondary rounded-pill px-4" 
+                           th:classappend="${paginaAtual == 0} ? 'disabled' : ''">
+                            <i class="bi bi-arrow-left me-1"></i> Anterior
+                        </a>
+                        
+                        <span class="small text-muted fw-semibold">
+                            Página <span th:text="${paginaAtual + 1}">1</span> de <span th:text="${totalPaginas}">1</span>
+                        </span>
+                        
+                        <a th:href="@{/noticias(page=${paginaAtual + 1})}" 
+                           class="btn btn-sm btn-outline-secondary rounded-pill px-4" 
+                           th:classappend="${paginaAtual == totalPaginas - 1} ? 'disabled' : ''">
+                            Próxima <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </nav>
+
                 </div>
+
             </div>
         </section>
-
     </main>
 
     <!-- RODAPÉ -->
