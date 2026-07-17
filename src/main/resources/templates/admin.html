@@ -700,7 +700,38 @@
         </div>
     </div>
 
-    
+    <!-- Bloco de alertas para alteração de senha -->
+    <div th:if="${param.erroSenha}" class="alert alert-danger text-center" role="alert">
+        <i class="bi bi-x-circle-fill me-1"></i>A senha atual digitada está incorreta!
+    </div>
+    <div th:if="${param.erroConfirmacao}" class="alert alert-danger text-center" role="alert">
+        <i class="bi bi-x-circle-fill me-1"></i>A nova senha e a confirmação devem ser iguais
+    </div>
+    <div th:if="${param.sucessoSenha}" class="alert alert-success text-center" role="alert">
+        <i class="bi bi-check-circle-fill me-1"></i>Senha alterada com sucesso!
+    </div>
+
+    <!-- CARD: ALTERAR SENHA -->
+    <div class="card mb-4">
+        <div class="card-header h3">Alterar Senha de Acesso:</div>
+        <div class="card-body">
+            <form th:action="@{/admin/alterar-senha}" method="POST" style="max-width: 400px;">
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-bold small text-secondary">Senha Atual:</label>
+                    <input type="password" name="senhaAtual" class="form-control" placeholder="Digite a senha atual" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-bold small text-secondary">Nova Senha:</label>
+                    <input type="password" name="novaSenha" class="form-control" placeholder="Digite a nova senha" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label fw-bold small text-secondary">Confirme a Nova Senha:</label>
+                    <input type="password" name="confirmacao" class="form-control" placeholder="Digite a nova senha" required>
+                </div>
+                <button type="submit" class="btn btn-custom-blue rounded-pill px-4">Atualizar Senha</button>
+            </form>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

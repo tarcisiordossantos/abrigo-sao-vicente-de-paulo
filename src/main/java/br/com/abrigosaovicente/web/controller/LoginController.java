@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.abrigosaovicente.web.model.Administrador;
 import br.com.abrigosaovicente.web.model.Conteudo;
 import br.com.abrigosaovicente.web.model.Midia;
 import br.com.abrigosaovicente.web.model.Noticia;
+import br.com.abrigosaovicente.web.repository.AdministradorRepository;
 import br.com.abrigosaovicente.web.repository.ConteudoRepository;
 import br.com.abrigosaovicente.web.service.UploadService;
 import jakarta.persistence.EntityNotFoundException;
@@ -33,6 +36,8 @@ public class LoginController {
     private final ConteudoRepository conteudoRepository;
     private final UploadService uploadService;
     private final NoticiaRepository noticiaRepository;
+    private final AdministradorRepository administradorRepository;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
 
@@ -45,12 +50,21 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String logar(@RequestParam String senha, Model model, HttpSession session){
+    public String logar(@RequestParam String email, @RequestParam String senha, Model model, HttpSession session){
         
-        if (!"abrigo123".equals(senha)){
+        Optional<Administrador> adminOptional = administradorRepository.findByEmailAndAtivoTrue(email);
+
+        if (adminOptional.isEmpty()) {
+            return "redirect:/login?erro=true";
+        }
+        
+        Administrador admin = adminOptional.get();
+
+        if (!passwordEncoder.matches(senha, admin.getSenha())) {
             return "redirect:/login?erro=true";
         }
 
+        session.setAttribute("emailUsuario", admin.getEmail());
         session.setAttribute("usuarioLogado", true);
         return "redirect:/admin";
     }
@@ -251,6 +265,38 @@ public class LoginController {
         }
 
         return "redirect:/admin?sucesso=true";
+    }
+
+
+
+    @PostMapping("/admin/alterar-senha")
+    public String alterarSenha(@RequestParam String senhaAtual, 
+                                @RequestParam String novaSenha,
+                                @RequestParam String confirmacao,  
+                                HttpSession session, 
+                                Model model) {
+        
+        if (session.getAttribute("usuarioLogado") == null) {
+            return "redirect:/login";
+        }
+
+        if (!confirmacao.equals(novaSenha)){
+            return "redirect:/admin?erroConfirmacao=true";
+        }
+
+        String emailLogado = (String) session.getAttribute("emailUsuario");
+
+        Administrador admin = administradorRepository.findByEmailAndAtivoTrue(emailLogado)
+            .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+
+        if (!passwordEncoder.matches(senhaAtual, admin.getSenha())) {
+            return "redirect:/admin?erroSenha=true";
+        }
+
+        admin.setSenha(passwordEncoder.encode(novaSenha));
+        administradorRepository.save(admin);
+
+        return "redirect:/admin?sucessoSenha=true";
     }
 
 
