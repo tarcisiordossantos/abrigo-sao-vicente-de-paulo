@@ -15,7 +15,7 @@ public class EmailService {
     public void enviarEmail(ContatoForm dto){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo("abrigogestor@hotmail.com");
+        mailMessage.setTo("lardeidososasvp@gmail.com");
         mailMessage.setReplyTo(dto.email());
         mailMessage.setSubject("Site Abrigo - " + dto.assunto());
         mailMessage.setText("Nome: " + dto.nome() 
