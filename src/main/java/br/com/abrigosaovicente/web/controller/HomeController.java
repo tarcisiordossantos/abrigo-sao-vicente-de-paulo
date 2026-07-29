@@ -43,7 +43,7 @@ public class HomeController {
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
 
-        model.addAttribute("imagensCarrossel", imagensCarrossel );
+        model.addAttribute("imagensCarrossel", imagensCarrossel);
         model.addAttribute("textos", textos);
 
         return "index";
@@ -128,14 +128,17 @@ public class HomeController {
     public String buscarDoar(Model model){
         List<Conteudo> conteudos = conteudoRepository.findAll();
         Midia fotoDoarAgora = midiaRepository.findFirstBySecao("doar-agora").orElse(null);
+        List<Midia> imagensCarrossel = midiaRepository.findBySecaoAndAtivoTrue("carrossel");
 
         Map<String, String> textos = conteudos.stream()
             .collect(Collectors.toMap(conteudo -> conteudo.getChave(), conteudo -> conteudo.getTexto()));
 
         model.addAttribute("textos", textos);
         model.addAttribute("fotoDoarAgora", fotoDoarAgora);
+        model.addAttribute("imagensCarrossel", imagensCarrossel);
 
         return "doar";
+        
     }
 
 

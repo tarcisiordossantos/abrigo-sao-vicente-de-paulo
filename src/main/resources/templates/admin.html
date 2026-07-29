@@ -519,11 +519,28 @@
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
                     </div>
                 </form>
-                <form th:action="@{/admin}" method="POST">
+                <form th:action="@{/admin}" method="POST" class="mb-4">
                     <input type="hidden" name="chave" value="doar.apelo.texto">
                     <label class="form-label fw-bold">Texto de Apelo Emocional:</label>
                     <div class="input-group">
                         <textarea name="texto" class="form-control" rows="3" th:text="${textos['doar.apelo.texto']}"></textarea>
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+
+                <form th:action="@{/admin}" method="POST" class="mb-3">
+                    <input type="hidden" name="chave" value="doar.mensal.titulo">
+                    <label class="form-label fw-bold">Título Doação Mensal:</label>
+                    <div class="input-group">
+                        <input type="text" name="texto" class="form-control" th:value="${textos['doar.mensal.titulo']}">
+                        <button class="btn btn-custom-blue" type="submit">Salvar</button>
+                    </div>
+                </form>
+                <form th:action="@{/admin}" method="POST" class="mb-4">
+                    <input type="hidden" name="chave" value="doar.mensal.texto">
+                    <label class="form-label fw-bold">Texto Doação Mensal:</label>
+                    <div class="input-group">
+                        <textarea name="texto" class="form-control" rows="3" th:text="${textos['doar.mensal.texto']}"></textarea>
                         <button class="btn btn-custom-blue" type="submit">Salvar</button>
                     </div>
                 </form>
